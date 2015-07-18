@@ -11,6 +11,9 @@
     <script src="lib/angular/angular.js"></script>
     <script src="lib/onsen/js/onsenui.js"></script>
 
+	    <xlink rel="stylesheet" href="meucss.css" />	
+		
+		
     <!-- CSS dependencies -->
     <link rel="stylesheet" href="lib/onsen/css/onsenui.css" />
     <link rel="stylesheet" href="lib/onsen/css/onsen-css-components-blue-basic-theme.css" />
@@ -19,12 +22,13 @@
     <link rel="stylesheet" href="lib/angular/angular-csp.css" />
 
 
+
     <!-- --------------- App init --------------- -->
     <script src="js/app.js"></script>
 
     <title>Onsen UI Master-Details</title>
 
-    <style>
+<style>
         .item {
             padding: 10px;
             line-height: 1;
@@ -236,7 +240,196 @@
   background-image: none;
   border: none;
 }
-    </style>
+
+.button--large--cta {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  height: auto;
+  text-decoration: none;
+  padding: 4px 10px;
+  font-size: 17px;
+  line-height: 32px;
+  letter-spacing: 0;
+  color: #fff;
+  vertical-align: middle;
+  background-color: rgba(24,103,194,0.81);
+  border: 0px solid currentColor;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+  border: none;
+  background-color: #25a6d9;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 36px;
+  padding: 4px 12px;
+  width: 100%;
+  text-align: center;
+  display: block;
+}
+.button--large--cta:hover {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.button--large--cta:focus {
+  outline: 0;
+}
+.button--large--cta:active {
+  color: #fff;
+  background-color: #25a6d9;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+  opacity: 0.2;
+}
+.button--large--cta:disabled,
+.button--large--cta[disabled] {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+
+.button {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  height: auto;
+  text-decoration: none;
+  padding: 4px 10px;
+  font-size: 17px;
+  line-height: 32px;
+  letter-spacing: 0;
+  color: #fff;
+  vertical-align: middle;
+  background-color: #ff0000;
+  border: 0px solid currentColor;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.button:hover {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.button:active {
+  background-color: #ff0000;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+  opacity: 0.2;
+}
+.button:focus {
+  outline: 0;
+}
+.button:disabled,
+.button[disabled] {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+.button--large {
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 36px;
+  padding: 4px 12px;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+.button--large:active {
+  background-color: #ff0000;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+  opacity: 0.2;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.button--large:disabled,
+.button--large[disabled] {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+.button--large:hover {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.button--large:focus {
+  outline: 0;
+}
+
+
+</style>
 
 </head>
 
@@ -260,15 +453,15 @@
                 <ons-list-item modifier="chevron" class="item" ng-repeat="item in items" ng-click="showDetail($index)">
                     <ons-row>
                         <ons-col width="80px">
-							<div class="list-item-left"><img src="http://chamagar.com/fotos/6.jpg" class="item-thum">
+							<div class="list-item-left"><img src="http://chamagar.com/fotos/{{mesa[0].fotogarcom}}" class="item-thum">
 							</div>
                         </ons-col>
                         <ons-col>
                             <header>
-                                <span class="item-title">{{item.title}}</span>
+                                <span class="item-title">{{txtchamando}}</span>
                             </header>
-                            <p class="item-desc">{{item.desc}}</p>
-							<p class="item-desc"><ons-icon icon="refresh" size="11px" spin="true" fixed-width="true"></ons-icon></ons-icon><span style="font-size:11px"> {{item.txtchamando}}</span></p>
+                            <p class="item-desc">{{mesa[0].nomegarcom}}</p>
+							<p class="item-desc" ng-show="chamando"><font color={{mesa[0].corfonte}}><ons-icon icon="refresh" size="14px" spin="true" fixed-width="true"></ons-icon></ons-icon><span style="font-size:13px"> {{mesa[0].tempo}}</font></span></p>
                         </ons-col>
                     </ons-row>
                 </ons-list-item>
@@ -337,22 +530,24 @@
             <ons-list modifier="inset" style="margin-top: 10px">
                 <ons-list-item class="item">
                     <ons-row>
-                        <ons-col width="60px">
-                            <div class="item-thum"></div>
+                        <ons-col width="80px">
+							<div class="list-item-left"><img src="http://chamagar.com/fotos/{{mesa[0].fotogarcom}}" class="item-thum">
+							</div>
                         </ons-col>
                         <ons-col>
                             <header>
-                                <span class="item-title">{{item.title}}</span>
-                                <span class="item-label">{{item.label}}</span>
+                                <span class="item-title">{{txtchamando}}</span>
                             </header>
-                            <p class="item-desc">{{item.desc}}</p>
+                            <p class="item-desc">{{mesa[0].nomegarcom}}</p>
+							<p class="item-desc" ng-show="chamando"><font color=orange><ons-icon icon="refresh" size="14px" spin="true" fixed-width="true"></ons-icon></ons-icon><span style="font-size:13px"> {{mesa[0].tempo}}</font></span></p>
                         </ons-col>
                     </ons-row>
                 </ons-list-item>
 
-                <ons-list-item modifier="chevron" ng-click="doSomething()">
-                    <ons-icon icon="ion-chatboxes" fixed-width="true" style="color: #ccc"></ons-icon>
-                    Add a note
+                <ons-list-item  ><br><br>
+                    <button class="button button--large" ng-show="chamando" ng-click="cancelarChamado()" >Cancelar Chamado</button>
+					<button class="button--large--cta" ng-show="!chamando" ng-click="ativarChamado()" >Chamar Garçom</button>			
+					
                 </ons-list-item>
             </ons-list>
 
