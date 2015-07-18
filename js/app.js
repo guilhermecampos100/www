@@ -31,7 +31,8 @@
           {
               title: 'Chamar Garçom',
               label: '0:22s',
-              desc: 'Damiano Macedo'
+              desc: 'Damiano Macedo',
+			  txtchamando: '0:22s'
           }
       ];
 

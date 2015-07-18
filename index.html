@@ -31,14 +31,14 @@
         }
 
         .item-thum {
-            width: 50px;
-            height: 50px;
+            width: 70px;
+            height: 70px;
             border-radius: 4px;
         }
 
         .item-title {
             font-size: 15px;
-            font-weight: 500;
+            font-weight: 800;
         }
 
         .item-desc {
@@ -259,23 +259,23 @@
             <ons-list ng-controller="MasterController">
                 <ons-list-item modifier="chevron" class="item" ng-repeat="item in items" ng-click="showDetail($index)">
                     <ons-row>
-                        <ons-col width="60px">
+                        <ons-col width="80px">
 							<div class="list-item-left"><img src="http://chamagar.com/fotos/6.jpg" class="item-thum">
 							</div>
                         </ons-col>
                         <ons-col>
                             <header>
                                 <span class="item-title">{{item.title}}</span>
-                                <span class="item-label">{{item.label}}</span>
                             </header>
                             <p class="item-desc">{{item.desc}}</p>
+							<p class="item-desc"><ons-icon icon="refresh" size="11px" spin="true" fixed-width="true"></ons-icon></ons-icon><span style="font-size:11px"> {{item.txtchamando}}</span></p>
                         </ons-col>
                     </ons-row>
                 </ons-list-item>
 				
 				<ons-list-item modifier="chevron" class="item" ng-repeat="item in items" ng-click="showDetail($index)">
                     <ons-row>
-                        <ons-col width="60px">
+                        <ons-col width="80px">
 							<center><ons-icon icon="fa-beer" size="30px" class="item-thum"></ons-icon></center>
                         </ons-col>
                         <ons-col>
@@ -290,7 +290,7 @@
 				
 				<ons-list-item modifier="chevron" class="item" ng-repeat="item in items" ng-click="showDetail($index)">
                     <ons-row>
-                        <ons-col width="60px"><center>
+                        <ons-col width="80px"><center>
 							<ons-icon icon="fa-money" size="30px" class="item-thum"></ons-icon></center>
                         </ons-col>
                         <ons-col>
@@ -304,7 +304,7 @@
 
 				<ons-list-item modifier="chevron" class="item" ng-repeat="item in items" ng-click="showDetail($index)">
                     <ons-row>
-                        <ons-col width="60px"><center>
+                        <ons-col width="80px"><center>
 							<ons-icon icon="fa-star" size="30px" class="item-thum"></ons-icon></center>
                         </ons-col>
                         <ons-col>
