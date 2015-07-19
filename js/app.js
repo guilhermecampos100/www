@@ -4,7 +4,52 @@
 
 	
 	
-  var module = angular.module('app', ['onsen']);
+  var module = angular.module('app', ['onsen','autocomplete']);
+  
+   module.controller('MyCtrl', function($scope, MovieRetriever){
+        $scope.movies = ["Lord of the Rings",
+                        "Drive",
+                        "Science of Sleep",
+                        "Back to the Future",
+                        "Oldboy"];
+
+        // gives another movie array on change
+        $scope.updateMovies = function(typed){
+            // MovieRetriever could be some service returning a promise
+            $scope.newmovies = MovieRetriever.getmovies(typed);
+            $scope.newmovies.then(function(data){
+              $scope.movies = data;
+            });
+        }
+    });
+  
+  
+  // the service that retrieves some movie title from an url
+module.factory('MovieRetriever', function($http, $q, $timeout){
+  var MovieRetriever = new Object();
+
+  MovieRetriever.getmovies = function(i) {
+    var moviedata = $q.defer();
+    var movies;
+
+    var someMovies = ["The Wolverine", "The Smurfs 2", "The Mortal Instruments: City of Bones", "Drinking Buddies", "All the Boys Love Mandy Lane", "The Act Of Killing", "Red 2", "Jobs", "Getaway", "Red Obsession", "2 Guns", "The World's End", "Planes", "Paranoia", "The To Do List", "Man of Steel"];
+
+    var moreMovies = ["The Wolverine", "The Smurfs 2", "The Mortal Instruments: City of Bones", "Drinking Buddies", "All the Boys Love Mandy Lane", "The Act Of Killing", "Red 2", "Jobs", "Getaway", "Red Obsession", "2 Guns", "The World's End", "Planes", "Paranoia", "The To Do List", "Man of Steel", "The Way Way Back", "Before Midnight", "Only God Forgives", "I Give It a Year", "The Heat", "Pacific Rim", "Pacific Rim", "Kevin Hart: Let Me Explain", "A Hijacking", "Maniac", "After Earth", "The Purge", "Much Ado About Nothing", "Europa Report", "Stuck in Love", "We Steal Secrets: The Story Of Wikileaks", "The Croods", "This Is the End", "The Frozen Ground", "Turbo", "Blackfish", "Frances Ha", "Prince Avalanche", "The Attack", "Grown Ups 2", "White House Down", "Lovelace", "Girl Most Likely", "Parkland", "Passion", "Monsters University", "R.I.P.D.", "Byzantium", "The Conjuring", "The Internship"]
+
+    if(i && i.indexOf('T')!=-1)
+      movies=moreMovies;
+    else
+      movies=moreMovies;
+
+    $timeout(function(){
+      moviedata.resolve(movies);
+    },1000);
+
+    return moviedata.promise
+  }
+
+  return MovieRetriever;
+});
 
   module.controller('AppController', function($scope, $data, $http) {
     $scope.doSomething = function() {
@@ -14,6 +59,9 @@
 	  
     };
 	
+	
+
+		
 	$scope.cancelarChamado = function($data) {
 	$http.get("http://chamagar.com/mx/cgjson.asp?codigomesa=aaaa&acao=cancelar&hora=" + Date.now())
 	.success(function(response) {
@@ -106,14 +154,43 @@
 	
 });
 
+  module.controller('PedidoController', function($scope, $data, $http, $timeout) {
+    $scope.item = $data.selectedItem;
+	
+	
+	  $scope.users = [
+		  {"id":1,"nick":"Paula"},
+		{"id":2,"nick":"Amanda"},
+		{"id":3,"nick":"Lisa"},
+		{"id":4,"nick":"Bonnie"},
+		{"id":5,"nick":"Tammy"},
+		{"id":6,"nick":"Annie"},
+		{"id":7,"nick":"Jeremy"},
+		{"id":8,"nick":"Virginia"}
+			];
+			
+
+
+});
+
+
   module.controller('MasterController', function($scope, $data, $http, $timeout) {
     $scope.items = $data.items;
 
+
+	
     $scope.showDetail = function(index) {
       var selectedItem = $data.items[index];
       $data.selectedItem = selectedItem;
       $scope.navi.pushPage('detail.html', {title : selectedItem.title});
     };
+
+    $scope.showPedido = function(index) {
+      var selectedItem = $data.items[index];
+      $data.selectedItem = selectedItem;
+      $scope.navi.pushPage('pedido.html', {title : selectedItem.title});
+    };
+
 	
 	$scope.counter = 0;
     var timer;

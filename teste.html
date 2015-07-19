@@ -1,34 +1,27 @@
-<!DOCTYPE html>
-<!-- CSP support mode (required for Windows Universal apps): https://docs.angularjs.org/api/ng/directive/ngCsp -->
-<html lang="en" ng-app="app" ng-csp>
-<head>
+<html>
+<header>
+
     <meta charset="utf-8" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="mobile-web-app-capable" content="yes" />
-
     <!-- JS dependencies (order matters!) -->
     <script src="scripts/platformOverrides.js"></script>
     <script src="lib/angular/angular.js"></script>
-    <script src="lib/onsen/js/onsenui.js"></script>
-
-	    <xlink rel="stylesheet" href="meucss.css" />	
-		
-		
+    <script src="lib/onsen/js/onsenui.js"></script>	
+	
     <!-- CSS dependencies -->
     <link rel="stylesheet" href="lib/onsen/css/onsenui.css" />
     <link rel="stylesheet" href="lib/onsen/css/onsen-css-components-blue-basic-theme.css" />
 
-    <!-- CSP support mode (required for Windows Universal apps) -->
-    <link rel="stylesheet" href="lib/angular/angular-csp.css" />
+    <link rel="stylesheet" href="lib/angular/angular-csp.css" />	
+	
+    <script src="cordova.js"></script>
+    <script src="scripts/index.js"></script>
 
-<script src="js/autocomplete.js"></script>
-<link rel="stylesheet" href="css/autocomplete.css" />
-<xlink rel="stylesheet" href="css/style_autocomplete.css" />
-
-    <!-- --------------- App init --------------- -->
-    <script src="js/app.js"></script>
-
-    <title>Onsen UI Master-Details</title>
+	
+<script src="js/awesomplete.js"></script>
+<link rel="stylesheet" href="css/awesomplete.css" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 
 <style>
         .item {
@@ -490,159 +483,41 @@
 }
 </style>
 
-</head>
+
+</header>
+
 
 <body ng-controller="AppController">
-    <!-- Cordova reference -->
-    <script src="cordova.js"></script>
-    <script src="scripts/index.js"></script>
-    <!-- -->
 
     <ons-navigator var="navi">
-        <ons-page>
 
-
-			`
-			<div class="navigation-bar">
-				<div class="navigation-bar__center">Bela Vista - Mesa 7</div>
-			</div>
-
-
-            <ons-list ng-controller="MasterController">
-
-                <ons-list-item modifier="chevron" class="item" ng-repeat="item in items" ng-click="showDetail($index)">
-                    <ons-row>
-                        <ons-col width="80px">
-							<div class="list-item-left"><img src="http://chamagar.com/fotos/{{mesa[0].fotogarcom}}" class="item-thum">
-							</div>
-                        </ons-col>
-                        <ons-col>
-                            <header>
-                                <span class="item-title">{{txtchamando}}</span>
-                            </header>
-                            <p class="item-desc">{{mesa[0].nomegarcom}}</p>
-							<p class="item-desc" ng-show="chamando"><font color={{mesa[0].corfonte}}><ons-icon icon="refresh" size="14px" spin="true" fixed-width="true"></ons-icon></ons-icon><span style="font-size:13px"> {{mesa[0].tempo}}</font></span></p>
-                        </ons-col>
-                    </ons-row>
-                </ons-list-item>
-				
-				<ons-list-item modifier="chevron" class="item" ng-repeat="item in items" ng-click="showPedido($index)">
-                    <ons-row>
-                        <ons-col width="80px">
-							<center><ons-icon icon="fa-beer" size="30px" class="item-thum"></ons-icon></center>
-                        </ons-col>
-                        <ons-col>
-                            <header>
-                                <span class="item-title">Pedir Item do Cardápio</span>
-                             </header>
-                            <p class="item-desc">Peça diretamente ao balcão</p>
-                        </ons-col>
-                    </ons-row>
-					
-					 
-					 
-					 
-                </ons-list-item>
-
-				<ons-list-item modifier="chevron" class="item" ng-repeat="item in items" ng-click="showPedido($index)">
-                    <ons-row>
-                        <ons-col width="80px"><center>
-							<ons-icon icon="fa-money" size="30px" class="item-thum"></ons-icon></center>
-                        </ons-col>
-                        <ons-col>
-                            <header>
-                                <span class="item-title">Fechar a Conta</span>
-                             </header>
-                            <p class="item-desc">Peça diretamente ao balcão</p>
-                        </ons-col>
-                    </ons-row>
-                </ons-list-item>
-
-				<ons-list-item modifier="chevron" class="item" ng-repeat="item in items" ng-click="showPedido($index)">
-                    <ons-row>
-                        <ons-col width="80px"><center>
-							<ons-icon icon="fa-star" size="30px" class="item-thum"></ons-icon></center>
-                        </ons-col>
-                        <ons-col>
-                            <header>
-                                <span class="item-title">De uma nota</span>
-                             </header>
-                            <p class="item-desc">Obrigado por contribuir</p>
-                        </ons-col>
-                    </ons-row>
-                </ons-list-item>
-
-            </ons-list>			 
-			 
-			<div class="bottom-bar">
-  <div class="bottom-bar__line-height" style="text-align:center">ChamaGar.com</div>
-</div>
 			
-			
-        </ons-page>
-    </ons-navigator>
 
-    <ons-template id="detail.html">
-        <ons-page ng-controller="DetailController">
 
-            <ons-toolbar>
-                <div class="left"><ons-back-button>Voltar</ons-back-button></div>
-                <div class="center">Chama Garçom</div>
-            </ons-toolbar>
+
+    <ons-template id="pedido.html">
+        <ons-page ng-controller="PedidoController">
+
 
             <ons-list modifier="inset" style="margin-top: 10px">
                 <ons-list-item class="item">
-                    <ons-row>
-                        <ons-col width="80px">
-							<div class="list-item-left"><img src="http://chamagar.com/fotos/{{mesa[0].fotogarcom}}" class="item-thum">
-							</div>
-                        </ons-col>
-                        <ons-col>
-                            <header>
-                                <span class="item-title">{{txtchamando}}</span>
-                            </header>
-                            <p class="item-desc">{{mesa[0].nomegarcom}}</p>
-							<p class="item-desc" ng-show="chamando"><font color={{mesa[0].corfonte}}><ons-icon icon="refresh" size="11px" spin="true" fixed-width="true"></ons-icon></ons-icon><span style="font-size:11px"> {{mesa[0].tempo}}</font></span></p>
-                        </ons-col>
-                    </ons-row>
+                    <center><br>
+					Digite um item do cardápio:<br><br>
+					   
+					   <input autofocus type="text" name="itemcardapio" id="txtitem" class="awesomplete" data-list="chopp1, chopp2" /> 
+						
+						</center>
+                    
                 </ons-list-item>
 
-                <ons-list-item  ><br><br>
-                    <button class="button button--large" ng-show="chamando" ng-click="cancelarChamado()" >Cancelar Chamado</button>
-					<button class="button--large--cta" ng-show="!chamando" ng-click="ativarChamado()" >Chamar Garçom</button>			
-					
-                </ons-list-item>
-				   
+             
             </ons-list>
-
-
-
-            <br>
-
-        </ons-page>
-    </ons-template>
-	
-    <ons-template id="pedido.html">
-        <ons-page>
-
-            <ons-toolbar>
-                <div class="left"><ons-back-button>Voltar</ons-back-button></div>
-                <div class="center">Pedido Direto</div>
-            </ons-toolbar>
-			
-			<center><br><br>
-			Digite um item do cardápio:<br><br>
-					
-			<div ng-controller="MyCtrl" width=90%>
-			  <autocomplete ng-model="yourchoice" data="movies" on-type="updateMovies"></autocomplete><br>
-			</div><br>
 			
 			
-		    <button class="button--large--cta" >Enviar Pedido</button>		
-			</center>
+</ons-page>
+</ons-template>
+</ons-navigator>
 
 
-        </ons-page>
-    </ons-template>	
 </body>
 </html>
