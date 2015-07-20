@@ -488,6 +488,139 @@
   border: 1px solid #ddd;
   color: #1f1f21;
 }
+
+
+.plan-list {
+  border-top: none;
+  background-image: none !important;
+}
+
+.plan {
+  line-height: 1;
+  padding: 0;
+}
+
+.plan-left {
+  text-align: right;
+  padding: 10px 10px 10px 0;
+}
+
+.plan-center {
+  background-color: #3399ff;
+  opacity: 0.5;
+}
+
+.plan-right {
+  padding: 10px 40px 10px 10px;
+}
+
+.plan-date {
+  font-size: 14px;
+  opacity: 0.8;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.plan-duration {
+  font-size: 11px;
+  opacity: 0.4;
+}
+
+.plan-name {
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+
+.plan-info {
+  opacity: 0.4;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.list--noborder {
+  border-top: none;
+  border-bottom: none;
+}
+.list__header {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+  display: block;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0 0 0 10px;
+  font-size: 15px;
+  font-weight: 500;
+  background-color: #eee;
+  color: #1f1f21;
+  text-shadow: none;
+  border-top: none;
+  border-bottom: none;
+  min-height: 24px;
+  line-height: 24px;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .list__header:first-child {
+    border-top: none;
+    -webkit-background-size: 100% 1px;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-image: -webkit-linear-gradient(270deg, rgba(0,0,0,.0), rgba(0,0,0,.0) 50%, transparent 50%);
+    background-image: -moz-linear-gradient(270deg, rgba(0,0,0,.0), rgba(0,0,0,.0) 50%, transparent 50%);
+    background-image: -o-linear-gradient(270deg, rgba(0,0,0,.0), rgba(0,0,0,.0) 50%, transparent 50%);
+    background-image: linear-gradient(180deg, rgba(0,0,0,.0), rgba(0,0,0,.0) 50%, transparent 50%);
+  }
+}
+.list {
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  text-align: left;
+  overflow: auto;
+  display: block;
+  -webkit-overflow-scrolling: touch;
+  padding: 0;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  background-color: #fff;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .list {
+    border: none;
+    -webkit-background-size: 100% 1px, 100% 1px;
+    background-size: 100% 1px, 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom, top;
+    background-image: -webkit-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%), -webkit-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -moz-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%), -moz-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -o-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%), -o-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%), linear-gradient(180deg, #ddd, #ddd 50%, transparent 50%);
+  }
+}
+
+
+
 </style>
 
 </head>
@@ -521,7 +654,7 @@
                                 <span class="item-title">{{txtchamando}}</span>
                             </header>
                             <p class="item-desc">{{mesa[0].nomegarcom}}</p>
-							<p class="item-desc" ng-show="chamando"><font color={{mesa[0].corfonte}}><ons-icon icon="refresh" size="14px" spin="true" fixed-width="true"></ons-icon></ons-icon><span style="font-size:13px"> {{mesa[0].tempo}}</font></span></p>
+							<p class="item-desc" ng-show="chamando"><font color={{mesa[0].corfonte}}><ons-icon icon="refresh" size="14px" spin="true" fixed-width="true"></ons-icon><span style="font-size:13px"> {{mesa[0].tempo}}</font></span></p>
                         </ons-col>
                     </ons-row>
                 </ons-list-item>
@@ -565,7 +698,7 @@
                         </ons-col>
                         <ons-col>
                             <header>
-                                <span class="item-title">De uma nota</span>
+                                <span class="item-title">De uma notaa</span>
                              </header>
                             <p class="item-desc">Obrigado por contribuir</p>
                         </ons-col>
@@ -627,19 +760,62 @@
 
             <ons-toolbar>
                 <div class="left"><ons-back-button>Voltar</ons-back-button></div>
-                <div class="center">Pedido Direto</div>
+                <div class="center">Fazer Pedido</div>
             </ons-toolbar>
 			
-			<center><br><br>
-			Digite um item do cardápio:<br><br>
+			
+		<ul class="list">
+		  <li class="list__header">
+	
+		  </li>
+		  <li class="list__item">
+			<div ng-controller="MyCtrl" >
+			  <autocomplete ng-model="itemcardapio" data="movies" xon-type="updateMovies"></autocomplete>
+			  <ons-row>
+					  <ons-col width="60px"  class="plan-right">
+					 
+					  </ons-col>
+					 <ons-col  class="plan-left">
+					 <input type="tel" name="tel" style="width:70px; height:30px" value="1"/>
+					 <button class="button" ng-click="enviarpedido(itemcardapio);">Enviar Pedido</button><br><br>
+					  </ons-col>	
+				<ons-row>	  
+			 
+			 
+			</div>
+		  </li>
+		  <li class="list__header">
+			Pedidos Enviados
+		  </li>
+		</ul>
+				<ons-list class="plan-list" id="IDPedidoController"  ng-controller="PedidoController">
+				  <ons-list-item modifier="chevron" class="plan" ng-repeat="pedido in pedidos">
+					<ons-row>
+					  <ons-col width="80px" class="plan-left">
+						<div class="plan-date">{{pedido.hora}}</div>
+						<div class="plan-duration">{{pedido.tempo}}</div>
+					  </ons-col>
+
+					  <ons-col width="6px" class="plan-center" ng-style="{backgroundColor:pedido.status == '2' ? '#33ff33' : pedido.status == '1'  ?  '#3399ff' : '#ccc'}">
+					  </ons-col>
+
+					  <ons-col class="plan-right">
+						<div class="plan-name">{{pedido.quantidade}} {{pedido.itemcardapio}}</div>
+
+						<div class="plan-info">
+							<p class="item-desc" ><font color=gray><ons-icon ng-show="pedido.status == '1'" icon="refresh" size="14px" spin="true" fixed-width="true"></ons-icon><span style="font-size:13px">{{pedido.status == '2' ? 'Enviado' : pedido.status == '1'  ?  'Em andamento' : 'Encerrado'}}</font></span></p>
+						  </div>
+						</div>
+					  </ons-col>
+					</ons-row>
+				  </ons-list-item>
+				</ons-list>
+			
 					
-			<div ng-controller="MyCtrl" width=90%>
-			  <autocomplete ng-model="yourchoice" data="movies" on-type="updateMovies"></autocomplete><br>
-			</div><br>
-			
-			
-		    <button class="button--large--cta" >Enviar Pedido</button>		
-			</center>
+
+
+		
+		
 
 
         </ons-page>

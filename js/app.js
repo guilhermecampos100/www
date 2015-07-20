@@ -6,21 +6,16 @@
 	
   var module = angular.module('app', ['onsen','autocomplete']);
   
-   module.controller('MyCtrl', function($scope, MovieRetriever){
-        $scope.movies = ["Lord of the Rings",
-                        "Drive",
-                        "Science of Sleep",
-                        "Back to the Future",
-                        "Oldboy"];
 
-        // gives another movie array on change
-        $scope.updateMovies = function(typed){
-            // MovieRetriever could be some service returning a promise
-            $scope.newmovies = MovieRetriever.getmovies(typed);
-            $scope.newmovies.then(function(data){
-              $scope.movies = data;
-            });
-        }
+   module.controller('MyCtrl', function($scope, $http, MovieRetriever){
+	   	$http.get("http://chamagar.com/mx/cardapiojson.asp?acao=cancelar&hora=" + Date.now())
+	.success(function(response) {
+		$scope.movies = response;
+		})
+	.error(function(data, status) {
+           $scope.messages = data || "Request failed";
+           $scope.status = status;
+        })
     });
   
   
@@ -59,26 +54,36 @@ module.factory('MovieRetriever', function($http, $q, $timeout){
 	  
     };
 	
-	
+	$scope.enviarpedido = function(itemcardapio) {
+	$http.get("http://chamagar.com/mx/cgjson.asp?codigomesa=aaaa&acao=enviarpedido&hora=" + Date.now() + "&itemcardapio=" + itemcardapio)
+	.success(function(response) {
+		ons.notification.alert({ message: 'pedido enviado' });
 
+		var scope = angular.element(document.getElementById("IDPedidoController")).scope();
+		scope.loopgui();
+		})
+	.error(function(data, status) {
+           $scope.messages = data || "Request failed";
+           $scope.status = status;
+	   setTimeout(function() {
+        ons.notification.alert({ message: data });
+      }, 100);
+     });    
+	};	
 		
 	$scope.cancelarChamado = function($data) {
 	$http.get("http://chamagar.com/mx/cgjson.asp?codigomesa=aaaa&acao=cancelar&hora=" + Date.now())
 	.success(function(response) {
 		$scope.mesa = response;
-	  
 		$scope.navi.popPage();
-			
 		})
 	.error(function(data, status) {
            $scope.messages = data || "Request failed";
            $scope.status = status;
-		   
 	   setTimeout(function() {
         ons.notification.alert({ message: data });
       }, 100);
      });    
- 
 	};
 
 	$scope.ativarChamado = function() {
@@ -100,12 +105,8 @@ module.factory('MovieRetriever', function($http, $q, $timeout){
 
   module.controller('DetailController', function($scope, $data, $http, $timeout) {
     $scope.item = $data.selectedItem;
-	
-	$scope.counter = 0;
     var timer;
 
-
-	
     function myLoop() {
 	 $http.get("http://chamagar.com/mx/cgjson.asp?codigomesa=aaaa&hora=" + Date.now())
 	.success(function(response) {$scope.mesa = response;
@@ -119,19 +120,16 @@ module.factory('MovieRetriever', function($http, $q, $timeout){
 		$scope.txtchamando = "Chamando..."
 	}
 	});
-	$scope.counter++;
 	timer = $timeout(
 		function() { 
 			console.log( "Timeout executed", Date.now() ); 
 		},
-		1000
+		10000
 	);
-
 	timer.then(
 		function() { 
 			console.log( "Timer resolved!");
 			myLoop();
-
 		},
 		function() { 
 			console.log( "Timer rejected!" ); 
@@ -156,29 +154,54 @@ module.factory('MovieRetriever', function($http, $q, $timeout){
 
   module.controller('PedidoController', function($scope, $data, $http, $timeout) {
     $scope.item = $data.selectedItem;
-	
-	
-	  $scope.users = [
-		  {"id":1,"nick":"Paula"},
-		{"id":2,"nick":"Amanda"},
-		{"id":3,"nick":"Lisa"},
-		{"id":4,"nick":"Bonnie"},
-		{"id":5,"nick":"Tammy"},
-		{"id":6,"nick":"Annie"},
-		{"id":7,"nick":"Jeremy"},
-		{"id":8,"nick":"Virginia"}
-			];
-			
 
 
+    var timer;
+
+    var loopgui = function myLoop() {
+		 $http.get("http://chamagar.com/mx/pedidosjson.asp?codigomesa=aaaa&hora=" + Date.now())
+		.success(function(response) {
+			$scope.pedidos = response;
+		});
+		timer = $timeout(
+			function() { 
+				console.log( "Timeout executed", Date.now() ); 
+			},
+			10000
+		);
+		timer.then(
+			function() { 
+				console.log( "Timer resolved!");
+				myLoop();
+			},
+			function() { 
+				console.log( "Timer rejected!" ); 
+			}
+		);
+	}
+
+	loopgui();
+
+	// When the DOM element is removed from the page,
+	// AngularJS will trigger the $destroy event on
+	// the scope. 
+	// Cancel timeout
+	$scope.$on(
+		"$destroy",
+		function( event ) { 
+			$timeout.cancel( timer ); 
+		}
+	);
+	
 });
+
+
 
 
   module.controller('MasterController', function($scope, $data, $http, $timeout) {
     $scope.items = $data.items;
 
 
-	
     $scope.showDetail = function(index) {
       var selectedItem = $data.items[index];
       $data.selectedItem = selectedItem;
@@ -213,7 +236,7 @@ module.factory('MovieRetriever', function($http, $q, $timeout){
 		function() { 
 			console.log( "Timeout executed", Date.now() ); 
 		},
-		1000
+		10000
 	);
 
 	timer.then(
