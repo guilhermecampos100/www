@@ -3,13 +3,7 @@
 
   var module = angular.module('app', ['onsen','autocomplete']);
   
-  
-  module.controller('LoginController', function($scope) {
-    $scope.entrar = function($scope) {
-      $scope.navi.pushPage('principal.html', {title : 'testegui'});
-    };
-  });
-  
+
 
 	
 	
@@ -159,10 +153,19 @@ module.factory('MovieRetriever', function($http, $q, $timeout){
 	
 });
 
+
+  
+  module.controller('LoginController', function($scope, $data, $http) {
+	$scope.teste = 'testelalal';
+    $scope.entrar = function() {
+      $scope.navi.pushPage('principal.html', {title : 'testegui'});
+    };
+  });
+  
+  
+  
   module.controller('PedidoController', function($scope, $data, $http, $timeout) {
     $scope.item = $data.selectedItem;
-
-
     var timer;
 
     var loopgui = function myLoop() {

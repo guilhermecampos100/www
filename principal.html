@@ -1,0 +1,71 @@
+        <ons-page>
+
+			<div class="navigation-bar">
+				<div class="navigation-bar__center">Bela Vista - Mesa 7</div>
+			</div>
+
+
+            <ons-list ng-controller="MasterController">
+
+                <ons-list-item modifier="chevron" class="item" ng-repeat="item in items" ng-click="showDetail($index)">
+                    <ons-row>
+                        <ons-col width="80px">
+							<div class="list-item-left"><img src="http://chamagar.com/fotos/{{mesa[0].fotogarcom}}" class="item-thum">
+							</div>
+                        </ons-col>
+                        <ons-col>
+                            <header>
+                                <span class="item-title">{{txtchamando}}</span>
+                            </header>
+                            <p class="item-desc">{{mesa[0].nomegarcom}}</p>
+							<p class="item-desc" ng-show="chamando"><font color={{mesa[0].corfonte}}><ons-icon icon="refresh" size="14px" spin="true" fixed-width="true"></ons-icon><span style="font-size:13px"> {{mesa[0].tempo}}</font></span></p>
+                        </ons-col>
+                    </ons-row>
+                </ons-list-item>
+				
+				<ons-list-item modifier="chevron" class="item" ng-repeat="item in items" ng-click="showPedido($index)">
+                    <ons-row>
+                        <ons-col width="80px">
+							<center><ons-icon icon="fa-beer" size="30px" class="item-thum"></ons-icon></center>
+                        </ons-col>
+                        <ons-col>
+                            <header>
+                                <span class="item-title">Pedir Item do Cardápio</span>
+                             </header>
+                            <p class="item-desc">Peça diretamente ao balcão</p>
+                        </ons-col>
+                    </ons-row>
+					
+	 
+                </ons-list-item>
+
+				<ons-list-item modifier="chevron" class="item" ng-repeat="item in items" ng-click="showPedido($index)">
+                    <ons-row>
+                        <ons-col width="80px"><center>
+							<ons-icon icon="fa-money" size="30px" class="item-thum"></ons-icon></center>
+                        </ons-col>
+                        <ons-col>
+                            <header>
+                                <span class="item-title">Fechar a Conta</span>
+                             </header>
+                            <p class="item-desc">Peça diretamente ao balcão</p>
+                        </ons-col>
+                    </ons-row>
+                </ons-list-item>
+
+				<ons-list-item modifier="chevron" class="item" ng-repeat="item in items" ng-click="showPedido($index)">
+                    <ons-row>
+                        <ons-col width="80px"><center>
+							<ons-icon icon="fa-star" size="30px" class="item-thum"></ons-icon></center>
+                        </ons-col>
+                        <ons-col>
+                            <header>
+                                <span class="item-title">De uma nota</span>
+                             </header>
+                            <p class="item-desc">Obrigado por contribuir</p>
+                        </ons-col>
+                    </ons-row>
+                </ons-list-item>
+
+            </ons-list>			 
+			 

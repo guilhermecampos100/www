@@ -1,59 +1,5 @@
-<html>
-<header>
-
-    <meta charset="utf-8" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <!-- JS dependencies (order matters!) -->
-    <script src="scripts/platformOverrides.js"></script>
-    <script src="lib/angular/angular.js"></script>
-    <script src="lib/onsen/js/onsenui.js"></script>	
-	
-    <!-- CSS dependencies -->
-    <link rel="stylesheet" href="lib/onsen/css/onsenui.css" />
-    <link rel="stylesheet" href="lib/onsen/css/onsen-css-components-blue-basic-theme.css" />
-
-    <link rel="stylesheet" href="lib/angular/angular-csp.css" />	
-	
-    <script src="cordova.js"></script>
-    <script src="scripts/index.js"></script>
-
-	
-<script src="js/awesomplete.js"></script>
-<link rel="stylesheet" href="css/awesomplete.css" />
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-
 <style>
-        .item {
-            padding: 10px;
-            line-height: 1;
-        }
 
-        .item-thum {
-            width: 70px;
-            height: 70px;
-            border-radius: 4px;
-        }
-
-        .item-title {
-            font-size: 15px;
-            font-weight: 800;
-        }
-
-        .item-desc {
-            font-size: 14px;
-            color: #666;
-            line-height: 1.3;
-            margin: 4px 0 0 0;
-            padding: 0 30px 0 0;
-        }
-
-        .item-label {
-            font-size: 12px;
-            color: #999;
-            float: right;
-        }
-		
 .navigation-bar {
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -169,6 +115,7 @@
 .navigation-bar__center:first-child:last-child {
   width: 100%;
 }
+
 .bottom-bar {
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -481,43 +428,134 @@
   border: 1px solid #ddd;
   color: #1f1f21;
 }
+
+
+.plan-list {
+  border-top: none;
+  background-image: none !important;
+}
+
+.plan {
+  line-height: 1;
+  padding: 0;
+}
+
+.plan-left {
+  text-align: right;
+  padding: 10px 10px 10px 0;
+}
+
+.plan-center {
+  background-color: #3399ff;
+  opacity: 0.5;
+}
+
+.plan-right {
+  padding: 10px 40px 10px 10px;
+}
+
+.plan-date {
+  font-size: 14px;
+  opacity: 0.8;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.plan-duration {
+  font-size: 11px;
+  opacity: 0.4;
+}
+
+.plan-name {
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+
+.plan-info {
+  opacity: 0.4;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.list--noborder {
+  border-top: none;
+  border-bottom: none;
+}
+.list__header {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+  display: block;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0 0 0 10px;
+  font-size: 15px;
+  font-weight: 500;
+  background-color: #eee;
+  color: #1f1f21;
+  text-shadow: none;
+  border-top: none;
+  border-bottom: none;
+  min-height: 24px;
+  line-height: 24px;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .list__header:first-child {
+    border-top: none;
+    -webkit-background-size: 100% 1px;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-image: -webkit-linear-gradient(270deg, rgba(0,0,0,.0), rgba(0,0,0,.0) 50%, transparent 50%);
+    background-image: -moz-linear-gradient(270deg, rgba(0,0,0,.0), rgba(0,0,0,.0) 50%, transparent 50%);
+    background-image: -o-linear-gradient(270deg, rgba(0,0,0,.0), rgba(0,0,0,.0) 50%, transparent 50%);
+    background-image: linear-gradient(180deg, rgba(0,0,0,.0), rgba(0,0,0,.0) 50%, transparent 50%);
+  }
+}
+.list {
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  text-align: left;
+  overflow: auto;
+  display: block;
+  -webkit-overflow-scrolling: touch;
+  padding: 0;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  background-color: #fff;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .list {
+    border: none;
+    -webkit-background-size: 100% 1px, 100% 1px;
+    background-size: 100% 1px, 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom, top;
+    background-image: -webkit-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%), -webkit-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -moz-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%), -moz-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -o-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%), -o-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%), linear-gradient(180deg, #ddd, #ddd 50%, transparent 50%);
+  }
+}
 </style>
-
-
-</header>
-
-
-<body ng-controller="AppController">
-
-    <ons-navigator var="navi">
-
-			
-
-
-
-    <ons-template id="pedido.html">
-        <ons-page ng-controller="PedidoController">
-
-
-            <ons-list modifier="inset" style="margin-top: 10px">
-                <ons-list-item class="item">
-                    <center><br>
-					Digite um item do cardápio:<br><br>
-					   
-					   <input autofocus type="text" name="itemcardapio" id="txtitem" class="awesomplete" data-list="chopp1, chopp2" /> 
-						
-						</center>
-                    
-                </ons-list-item>
-
-             
-            </ons-list>
-			
-			
-</ons-page>
-</ons-template>
-</ons-navigator>
-
-
-</body>
-</html>

@@ -11,7 +11,7 @@
     <script src="lib/angular/angular.js"></script>
     <script src="lib/onsen/js/onsenui.js"></script>
 
-	    <xlink rel="stylesheet" href="meucss.css" />	
+
 		
 		
     <!-- CSS dependencies -->
@@ -23,14 +23,14 @@
 
 <script src="js/autocomplete.js"></script>
 <link rel="stylesheet" href="css/autocomplete.css" />
-<xlink rel="stylesheet" href="css/style_autocomplete.css" />
-
+<link rel="stylesheet" href="meucss.css" />	
     <!-- --------------- App init --------------- -->
-    <script src="js/app.js"></script>
+    <script src="app.js"></script>
 
     <title>Onsen UI Master-Details</title>
 
 <style>
+
         .item {
             padding: 10px;
             line-height: 1;
@@ -176,452 +176,17 @@
 .navigation-bar__center:first-child:last-child {
   width: 100%;
 }
-.bottom-bar {
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-weight: 400;
-  font-size: 17px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  white-space: nowrap;
-  overflow: hidden;
-  word-spacing: 0;
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  color: inherit;
-  background: transparent;
-  border: none;
-  line-height: normal;
-  cursor: default;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  z-index: 2;
-  display: block;
-  height: 44px;
-  padding-left: 0;
-  padding-right: 0;
-  background: #333333;
-  color: #ffffff;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  font-weight: 400;
-  border-bottom: none;
-  border-top: 1px solid #dddddd;
-  position: absolute;
-  bottom: 0px;
-  right: 0px;
-  left: 0px;
-}
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .bottom-bar {
-    border-top: none;
-    -webkit-background-size: 100% 1px;
-    background-size: 100% 1px;
-    background-repeat: no-repeat;
-    background-position: top;
-    background-image: -webkit-linear-gradient(270deg, #dddddd, #dddddd 50%, transparent 50%);
-    background-image: -moz-linear-gradient(270deg, #dddddd, #dddddd 50%, transparent 50%);
-    background-image: -o-linear-gradient(270deg, #dddddd, #dddddd 50%, transparent 50%);
-    background-image: linear-gradient(180deg, #dddddd, #dddddd 50%, transparent 50%);
-  }
-}
-.bottom-bar__line-height {
-  line-height: 44px;
-  padding-bottom: 0;
-  padding-top: 0;
-}
-.bottom-bar--transparent {
-  background-color: transparent;
-  background-image: none;
-  border: none;
-}
-
-.button--large--cta {
-  position: relative;
-  display: inline-block;
-  vertical-align: top;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  color: inherit;
-  background: transparent;
-  border: none;
-  line-height: normal;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-weight: 400;
-  font-size: 17px;
-  cursor: default;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  height: auto;
-  text-decoration: none;
-  padding: 4px 10px;
-  font-size: 17px;
-  line-height: 32px;
-  letter-spacing: 0;
-  color: #fff;
-  vertical-align: middle;
-  background-color: rgba(24,103,194,0.81);
-  border: 0px solid currentColor;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  -webkit-transition: none;
-  -moz-transition: none;
-  -o-transition: none;
-  transition: none;
-  border: none;
-  background-color: #25a6d9;
-  color: #fff;
-  font-size: 17px;
-  font-weight: 500;
-  line-height: 36px;
-  padding: 4px 12px;
-  width: 100%;
-  text-align: center;
-  display: block;
-}
-.button--large--cta:hover {
-  -webkit-transition: none;
-  -moz-transition: none;
-  -o-transition: none;
-  transition: none;
-}
-.button--large--cta:focus {
-  outline: 0;
-}
-.button--large--cta:active {
-  color: #fff;
-  background-color: #25a6d9;
-  -webkit-transition: none;
-  -moz-transition: none;
-  -o-transition: none;
-  transition: none;
-  opacity: 0.2;
-}
-.button--large--cta:disabled,
-.button--large--cta[disabled] {
-  opacity: 0.3;
-  cursor: default;
-  pointer-events: none;
-}
-
-.button {
-  position: relative;
-  display: inline-block;
-  vertical-align: top;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  color: inherit;
-  background: transparent;
-  border: none;
-  line-height: normal;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-weight: 400;
-  font-size: 17px;
-  cursor: default;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  height: auto;
-  text-decoration: none;
-  padding: 4px 10px;
-  font-size: 17px;
-  line-height: 32px;
-  letter-spacing: 0;
-  color: #fff;
-  vertical-align: middle;
-  background-color: #ff0000;
-  border: 0px solid currentColor;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  -webkit-transition: none;
-  -moz-transition: none;
-  -o-transition: none;
-  transition: none;
-}
-.button:hover {
-  -webkit-transition: none;
-  -moz-transition: none;
-  -o-transition: none;
-  transition: none;
-}
-.button:active {
-  background-color: #ff0000;
-  -webkit-transition: none;
-  -moz-transition: none;
-  -o-transition: none;
-  transition: none;
-  opacity: 0.2;
-}
-.button:focus {
-  outline: 0;
-}
-.button:disabled,
-.button[disabled] {
-  opacity: 0.3;
-  cursor: default;
-  pointer-events: none;
-}
-.button--large {
-  font-size: 17px;
-  font-weight: 500;
-  line-height: 36px;
-  padding: 4px 12px;
-  display: block;
-  width: 100%;
-  text-align: center;
-}
-.button--large:active {
-  background-color: #ff0000;
-  -webkit-transition: none;
-  -moz-transition: none;
-  -o-transition: none;
-  transition: none;
-  opacity: 0.2;
-  -webkit-transition: none;
-  -moz-transition: none;
-  -o-transition: none;
-  transition: none;
-}
-.button--large:disabled,
-.button--large[disabled] {
-  opacity: 0.3;
-  cursor: default;
-  pointer-events: none;
-}
-.button--large:hover {
-  -webkit-transition: none;
-  -moz-transition: none;
-  -o-transition: none;
-  transition: none;
-}
-.button--large:focus {
-  outline: 0;
-}
-
-.text-input {
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  color: inherit;
-  background: transparent;
-  border: none;
-  line-height: normal;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  vertical-align: top;
-  outline: none;
-  line-height: 1;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-weight: 400;
-  font-size: 17px;
-  letter-spacing: 0;
-  border: 1px solid #ddd;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-  background-color: #f9f9f9;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  color: #1f1f21;
-  padding: 4px 8px 0 8px;
-  margin: 0;
-  font-size: 15px;
-  height: 31px;
-  width: 100%;
-  font-weight: 400;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-.text-input::-webkit-input-placeholder,
-.text-input::-moz-placeholder,
-.text-input::-ms-input-placeholder {
-  color: #999;
-}
-.text-input:disabled {
-  opacity: 0.3;
-  cursor: default;
-  pointer-events: none;
-}
-.text-input:disabled::-webkit-input-placeholder,
-.text-input:disabled::-moz-placeholder,
-.text-input:disabled:-ms-input-placeholder {
-  color: #999;
-}
-.text-input:invalid {
-  border: 1px solid #ddd;
-  color: #1f1f21;
-}
-
-
-.plan-list {
-  border-top: none;
-  background-image: none !important;
-}
-
-.plan {
-  line-height: 1;
-  padding: 0;
-}
-
-.plan-left {
-  text-align: right;
-  padding: 10px 10px 10px 0;
-}
-
-.plan-center {
-  background-color: #3399ff;
-  opacity: 0.5;
-}
-
-.plan-right {
-  padding: 10px 40px 10px 10px;
-}
-
-.plan-date {
-  font-size: 14px;
-  opacity: 0.8;
-  margin-bottom: 4px;
-  font-weight: 500;
-}
-
-.plan-duration {
-  font-size: 11px;
-  opacity: 0.4;
-}
-
-.plan-name {
-  font-size: 17px;
-  margin-bottom: 8px;
-}
-
-.plan-info {
-  opacity: 0.4;
-  font-size: 12px;
-  line-height: 1.4;
-}
-
-.list--noborder {
-  border-top: none;
-  border-bottom: none;
-}
-.list__header {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  text-align: left;
-  display: block;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  padding: 0 0 0 10px;
-  font-size: 15px;
-  font-weight: 500;
-  background-color: #eee;
-  color: #1f1f21;
-  text-shadow: none;
-  border-top: none;
-  border-bottom: none;
-  min-height: 24px;
-  line-height: 24px;
-}
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .list__header:first-child {
-    border-top: none;
-    -webkit-background-size: 100% 1px;
-    background-size: 100% 1px;
-    background-repeat: no-repeat;
-    background-position: top;
-    background-image: -webkit-linear-gradient(270deg, rgba(0,0,0,.0), rgba(0,0,0,.0) 50%, transparent 50%);
-    background-image: -moz-linear-gradient(270deg, rgba(0,0,0,.0), rgba(0,0,0,.0) 50%, transparent 50%);
-    background-image: -o-linear-gradient(270deg, rgba(0,0,0,.0), rgba(0,0,0,.0) 50%, transparent 50%);
-    background-image: linear-gradient(180deg, rgba(0,0,0,.0), rgba(0,0,0,.0) 50%, transparent 50%);
-  }
-}
-.list {
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  color: inherit;
-  background: transparent;
-  border: none;
-  line-height: normal;
-  cursor: default;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-weight: 400;
-  font-size: 17px;
-  padding: 0;
-  margin: 0;
-  list-style-type: none;
-  text-align: left;
-  overflow: auto;
-  display: block;
-  -webkit-overflow-scrolling: touch;
-  padding: 0;
-  background-color: #fff;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  background-color: #fff;
-}
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .list {
-    border: none;
-    -webkit-background-size: 100% 1px, 100% 1px;
-    background-size: 100% 1px, 100% 1px;
-    background-repeat: no-repeat;
-    background-position: bottom, top;
-    background-image: -webkit-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%), -webkit-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: -moz-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%), -moz-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: -o-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%), -o-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%), linear-gradient(180deg, #ddd, #ddd 50%, transparent 50%);
-  }
-}
-
-
 
 </style>
+<style>
+ .red {
+    background-color: red;
+	height: 100%; 
+ }
+</style>
+
+<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+
 
 </head>
 
@@ -631,87 +196,26 @@
     <script src="scripts/index.js"></script>
     <!-- -->
 
-    <ons-navigator var="navi">
-        <ons-page>
-
-
-			`
-			<div class="navigation-bar">
-				<div class="navigation-bar__center">Bela Vista - Mesa 7</div>
-			</div>
-
-
-            <ons-list ng-controller="MasterController">
-
-                <ons-list-item modifier="chevron" class="item" ng-repeat="item in items" ng-click="showDetail($index)">
-                    <ons-row>
-                        <ons-col width="80px">
-							<div class="list-item-left"><img src="http://chamagar.com/fotos/{{mesa[0].fotogarcom}}" class="item-thum">
-							</div>
-                        </ons-col>
-                        <ons-col>
-                            <header>
-                                <span class="item-title">{{txtchamando}}</span>
-                            </header>
-                            <p class="item-desc">{{mesa[0].nomegarcom}}</p>
-							<p class="item-desc" ng-show="chamando"><font color={{mesa[0].corfonte}}><ons-icon icon="refresh" size="14px" spin="true" fixed-width="true"></ons-icon><span style="font-size:13px"> {{mesa[0].tempo}}</font></span></p>
-                        </ons-col>
-                    </ons-row>
-                </ons-list-item>
-				
-				<ons-list-item modifier="chevron" class="item" ng-repeat="item in items" ng-click="showPedido($index)">
-                    <ons-row>
-                        <ons-col width="80px">
-							<center><ons-icon icon="fa-beer" size="30px" class="item-thum"></ons-icon></center>
-                        </ons-col>
-                        <ons-col>
-                            <header>
-                                <span class="item-title">Pedir Item do Cardápio</span>
-                             </header>
-                            <p class="item-desc">Peça diretamente ao balcão</p>
-                        </ons-col>
-                    </ons-row>
-					
-					 
-					 
-					 
-                </ons-list-item>
-
-				<ons-list-item modifier="chevron" class="item" ng-repeat="item in items" ng-click="showPedido($index)">
-                    <ons-row>
-                        <ons-col width="80px"><center>
-							<ons-icon icon="fa-money" size="30px" class="item-thum"></ons-icon></center>
-                        </ons-col>
-                        <ons-col>
-                            <header>
-                                <span class="item-title">Fechar a Conta</span>
-                             </header>
-                            <p class="item-desc">Peça diretamente ao balcão</p>
-                        </ons-col>
-                    </ons-row>
-                </ons-list-item>
-
-				<ons-list-item modifier="chevron" class="item" ng-repeat="item in items" ng-click="showPedido($index)">
-                    <ons-row>
-                        <ons-col width="80px"><center>
-							<ons-icon icon="fa-star" size="30px" class="item-thum"></ons-icon></center>
-                        </ons-col>
-                        <ons-col>
-                            <header>
-                                <span class="item-title">De uma notaa</span>
-                             </header>
-                            <p class="item-desc">Obrigado por contribuir</p>
-                        </ons-col>
-                    </ons-row>
-                </ons-list-item>
-
-            </ons-list>			 
-			 
-			<div class="bottom-bar">
-  <div class="bottom-bar__line-height" style="text-align:center">ChamaGar.com</div>
-</div>
+    <ons-navigator var="navi" >
+        <ons-page class="red">
+		<div ng-controller="LoginController" class="red">
+		<br><br><br>
+		<font color="white">
+		<center><ons-icon icon="fa-beer" size="50px" ></ons-icon><br>
+		<font style="font-size:200%; font-family: 'Lobster';">ChamaGar.com</font>
+		
+		<br><br><br>
+		Digite o token de 5 letras<br><br>
+		<input type=text size=22px><br><br>
+	
+			<ons-button style="background-color:#333333" ng-click="entrar()">Entrar</ons-button>	 
 			
-			
+			</font>
+		<div class="bottom-bar">
+			<div class="bottom-bar__line-height" style="text-align:center">ChamaGar.com</div>
+		</div>
+		</center>
+		</div>	
         </ons-page>
     </ons-navigator>
 
@@ -756,7 +260,7 @@
     </ons-template>
 	
     <ons-template id="pedido.html">
-        <ons-page>
+        <ons-page ng-controller="PedidoController" class="red">
 
             <ons-toolbar>
                 <div class="left"><ons-back-button>Voltar</ons-back-button></div>
