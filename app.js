@@ -1,50 +1,18 @@
 (function(){
   'use strict';
 
-  var module = angular.module('app', ['onsen','autocomplete']);
-  
-
-
+var module = angular.module('app', ['onsen','autocomplete']);
+ 
 	
-	
-	
-   module.controller('MyCtrl', function($scope, $http, MovieRetriever){
-	   	$http.get("http://chamagar.com/mx/cardapiojson.asp?acao=cancelar&hora=" + Date.now())
-	.success(function(response) {
-		$scope.movies = response;
-		})
-	.error(function(data, status) {
-           $scope.messages = data || "Request failed";
-           $scope.status = status;
-        })
-    });
-  
-  
-  // the service that retrieves some movie title from an url
-module.factory('MovieRetriever', function($http, $q, $timeout){
-  var MovieRetriever = new Object();
-
-  MovieRetriever.getmovies = function(i) {
-    var moviedata = $q.defer();
-    var movies;
-
-    var someMovies = ["The Wolverine", "The Smurfs 2", "The Mortal Instruments: City of Bones", "Drinking Buddies", "All the Boys Love Mandy Lane", "The Act Of Killing", "Red 2", "Jobs", "Getaway", "Red Obsession", "2 Guns", "The World's End", "Planes", "Paranoia", "The To Do List", "Man of Steel"];
-
-    var moreMovies = ["The Wolverine", "The Smurfs 2", "The Mortal Instruments: City of Bones", "Drinking Buddies", "All the Boys Love Mandy Lane", "The Act Of Killing", "Red 2", "Jobs", "Getaway", "Red Obsession", "2 Guns", "The World's End", "Planes", "Paranoia", "The To Do List", "Man of Steel", "The Way Way Back", "Before Midnight", "Only God Forgives", "I Give It a Year", "The Heat", "Pacific Rim", "Pacific Rim", "Kevin Hart: Let Me Explain", "A Hijacking", "Maniac", "After Earth", "The Purge", "Much Ado About Nothing", "Europa Report", "Stuck in Love", "We Steal Secrets: The Story Of Wikileaks", "The Croods", "This Is the End", "The Frozen Ground", "Turbo", "Blackfish", "Frances Ha", "Prince Avalanche", "The Attack", "Grown Ups 2", "White House Down", "Lovelace", "Girl Most Likely", "Parkland", "Passion", "Monsters University", "R.I.P.D.", "Byzantium", "The Conjuring", "The Internship"]
-
-    if(i && i.indexOf('T')!=-1)
-      movies=moreMovies;
-    else
-      movies=moreMovies;
-
-    $timeout(function(){
-      moviedata.resolve(movies);
-    },1000);
-
-    return moviedata.promise
-  }
-
-  return MovieRetriever;
+module.controller('MyCtrl', function($scope, $http){
+	$http.get("http://chamagar.com/mx/cardapiojson.asp?acao=cancelar&hora=" + Date.now())
+.success(function(response) {
+	$scope.cardapio = response;
+	})
+.error(function(data, status) {
+	   $scope.messages = data || "Request failed";
+	   $scope.status = status;
+	})
 });
 
   module.controller('AppController', function($scope, $data, $http) {
@@ -55,8 +23,8 @@ module.factory('MovieRetriever', function($http, $q, $timeout){
 	  
     };
 	
-	$scope.enviarpedido = function(itemcardapio) {
-	$http.get("http://chamagar.com/mx/cgjson.asp?codigomesa=aaaa&acao=enviarpedido&hora=" + Date.now() + "&itemcardapio=" + itemcardapio)
+	$scope.enviarpedido = function(itemcardapio, token) {
+	$http.get("http://chamagar.com/mx/cgjson.asp?codigomesa="+token+"&acao=enviarpedido&hora=" + Date.now() + "&itemcardapio=" + itemcardapio)
 	.success(function(response) {
 		ons.notification.alert({ message: 'pedido enviado' });
 
@@ -72,8 +40,8 @@ module.factory('MovieRetriever', function($http, $q, $timeout){
      });    
 	};	
 		
-	$scope.cancelarChamado = function($data) {
-	$http.get("http://chamagar.com/mx/cgjson.asp?codigomesa=aaaa&acao=cancelar&hora=" + Date.now())
+	$scope.cancelarChamado = function(token) {
+	$http.get("http://chamagar.com/mx/cgjson.asp?codigomesa="+token+"&acao=cancelar&hora=" + Date.now())
 	.success(function(response) {
 		$scope.mesa = response;
 		$scope.navi.popPage();
@@ -87,8 +55,8 @@ module.factory('MovieRetriever', function($http, $q, $timeout){
      });    
 	};
 
-	$scope.ativarChamado = function() {
-		$http.get("http://chamagar.com/mx/cgjson.asp?codigomesa=aaaa&acao=ativar&hora=" + Date.now())
+	$scope.ativarChamado = function(token) {
+		$http.get("http://chamagar.com/mx/cgjson.asp?codigomesa="+token+"&acao=ativar&hora=" + Date.now())
 		.success(function(response) {$scope.mesa = response;
 		
 		$scope.navi.popPage();
@@ -107,10 +75,14 @@ module.factory('MovieRetriever', function($http, $q, $timeout){
   module.controller('DetailController', function($scope, $data, $http, $timeout) {
     $scope.item = $data.selectedItem;
     var timer;
-
+	var page = navi.getCurrentPage();
+	$scope.token = page.options.token;
+	
     function myLoop() {
-	 $http.get("http://chamagar.com/mx/cgjson.asp?codigomesa=aaaa&hora=" + Date.now())
-	.success(function(response) {$scope.mesa = response;
+	 $http.get("http://chamagar.com/mx/cgjson.asp?codigomesa="+ $scope.token +"&hora=" + Date.now())
+	.success(function(response) {
+	$scope.mesa = response;
+	$scope.fotogarcom = response[0].fotogarcom;
 	if (response[0].status == 0) {
 		$scope.chamando =  false; 
 		$scope.txtchamando = "Chamar Garçom"
@@ -153,23 +125,60 @@ module.factory('MovieRetriever', function($http, $q, $timeout){
 	
 });
 
-
-  
   module.controller('LoginController', function($scope, $data, $http) {
-	$scope.teste = 'testelalal';
-    $scope.entrar = function() {
-      $scope.navi.pushPage('principal.html', {title : 'testegui'});
+    var entrar = function(token, numeromesa, nomerestaurante) {
+      $scope.navi.pushPage('principal.html', {title : 'testegui', token: token, numeromesa: numeromesa, nomerestaurante: nomerestaurante});
     };
+	
+	var x = 1;
+	var url_token = getUrlParameter('token');
+
+
+	function getUrlParameter(sParam)
+	{
+		var sPageURL = window.location.search.substring(1);
+		var sURLVariables = sPageURL.split('&');
+		for (var i = 0; i < sURLVariables.length; i++) 
+		{
+			var sParameterName = sURLVariables[i].split('=');
+			if (sParameterName[0] == sParam) 
+			{
+				return sParameterName[1];
+			}
+		}
+	} 
+
+
+	$scope.loginMesa = function(token) {
+	 $http.get("http://chamagar.com/mx/cgjson.asp?codigomesa="+ token +"&hora=" + Date.now())
+	.success(function(response) {
+		$scope.mesa = response;
+		if (response[0].mesa == 'nao encontrada') {
+			$scope.mensagem =  "mesa não encontrada"; 
+		}
+		else
+		{
+			$scope.numeromesa = response[0].mesa;
+			entrar(token, response[0].mesa, response[0].restaurante );
+		}
+	});
+  };
+  
+	
+	if (url_token != undefined) {
+		$scope.loginMesa(url_token);
+	}  
+	
   });
-  
-  
   
   module.controller('PedidoController', function($scope, $data, $http, $timeout) {
     $scope.item = $data.selectedItem;
     var timer;
-
+	var page = navi.getCurrentPage();
+	$scope.token = page.options.token;
+		
     var loopgui = function myLoop() {
-		 $http.get("http://chamagar.com/mx/pedidosjson.asp?codigomesa=aaaa&hora=" + Date.now())
+		 $http.get("http://chamagar.com/mx/pedidosjson.asp?codigomesa="+ $scope.token + "&hora=" + Date.now())
 		.success(function(response) {
 			$scope.pedidos = response;
 		});
@@ -205,23 +214,30 @@ module.factory('MovieRetriever', function($http, $q, $timeout){
 	
 });
 
-
-
-
   module.controller('MasterController', function($scope, $data, $http, $timeout) {
     $scope.items = $data.items;
 
+	var page = navi.getCurrentPage();
+	$scope.token = page.options.token;
+	$scope.numeromesa = page.options.numeromesa;
+	$scope.nomerestaurante = page.options.nomerestaurante;
 
     $scope.showDetail = function(index) {
       var selectedItem = $data.items[index];
       $data.selectedItem = selectedItem;
-      $scope.navi.pushPage('detail.html', {title : selectedItem.title});
+      $scope.navi.pushPage('detail.html', {title : selectedItem.title, token: $scope.token});
     };
 
     $scope.showPedido = function(index) {
       var selectedItem = $data.items[index];
       $data.selectedItem = selectedItem;
-      $scope.navi.pushPage('pedido.html', {title : selectedItem.title});
+      $scope.navi.pushPage('pedido.html', {title : selectedItem.title, token: $scope.token});
+    };
+
+    $scope.showFecharConta = function(index) {
+      var selectedItem = $data.items[index];
+      $data.selectedItem = selectedItem;
+      $scope.navi.pushPage('fecharconta.html', {title : selectedItem.title, token: $scope.token});
     };
 
 	
@@ -229,7 +245,7 @@ module.factory('MovieRetriever', function($http, $q, $timeout){
     var timer;
 
     function myLoop() {
-	 $http.get("http://chamagar.com/mx/cgjson.asp?codigomesa=aaaa&hora=" + Date.now())
+	 $http.get("http://chamagar.com/mx/cgjson.asp?codigomesa="+$scope.token+"&hora=" + Date.now())
 	.success(function(response) {$scope.mesa = response;
 	if (response[0].status == 0) {
 		$scope.chamando =  false; 
@@ -278,8 +294,6 @@ module.factory('MovieRetriever', function($http, $q, $timeout){
   });
 
   
-
-
 module.$inject = ['$scope','$timeout'];
 
 

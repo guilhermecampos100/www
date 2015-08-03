@@ -27,7 +27,7 @@
     <!-- --------------- App init --------------- -->
     <script src="app.js"></script>
 
-    <title>Onsen UI Master-Details</title>
+    <title>Chama Garçom</title>
 
 <style>
 
@@ -196,6 +196,8 @@
     <script src="scripts/index.js"></script>
     <!-- -->
 
+	
+<!-- LOGIN PAGE -->
     <ons-navigator var="navi" >
         <ons-page class="red">
 		<div ng-controller="LoginController" class="red">
@@ -205,10 +207,10 @@
 		<font style="font-size:200%; font-family: 'Lobster';">ChamaGar.com</font>
 		
 		<br><br><br>
-		Digite o token de 5 letras<br><br>
-		<input type=text size=22px><br><br>
+		Digite o token de 4 letras<br><br>
+		<input type=text ng-model="token" size=22px><br><br>
 	
-			<ons-button style="background-color:#333333" ng-click="entrar()">Entrar</ons-button>	 
+			<ons-button style="background-color:#333333" ng-click="loginMesa(token)">Entrar</ons-button>	 
 			
 			</font>
 		<div class="bottom-bar">
@@ -218,20 +220,19 @@
 		</div>	
         </ons-page>
     </ons-navigator>
-
+	
+<!-- CHAMAR GARÇOM -->
     <ons-template id="detail.html">
         <ons-page ng-controller="DetailController">
-
             <ons-toolbar>
                 <div class="left"><ons-back-button>Voltar</ons-back-button></div>
                 <div class="center">Chama Garçom</div>
             </ons-toolbar>
-
             <ons-list modifier="inset" style="margin-top: 10px">
                 <ons-list-item class="item">
                     <ons-row>
                         <ons-col width="80px">
-							<div class="list-item-left"><img src="http://chamagar.com/fotos/{{mesa[0].fotogarcom}}" class="item-thum">
+							<div class="list-item-left"><img src=http://chamagar.com/fotos/{{fotogarcom}} class="item-thum">
 							</div>
                         </ons-col>
                         <ons-col>
@@ -243,22 +244,16 @@
                         </ons-col>
                     </ons-row>
                 </ons-list-item>
-
                 <ons-list-item  ><br><br>
-                    <button class="button button--large" ng-show="chamando" ng-click="cancelarChamado()" >Cancelar Chamado</button>
-					<button class="button--large--cta" ng-show="!chamando" ng-click="ativarChamado()" >Chamar Garçom</button>			
-					
-                </ons-list-item>
-				   
+                    <button class="button button--large" ng-show="chamando" ng-click="cancelarChamado(token)" >Cancelar Chamado</button>
+					<button class="button--large--cta" ng-show="!chamando" ng-click="ativarChamado(token)" >Chamar Garçom</button>								
+                </ons-list-item>				   
             </ons-list>
-
-
-
             <br>
-
         </ons-page>
     </ons-template>
 	
+<!-- FAZER PEDIDO -->	
     <ons-template id="pedido.html">
         <ons-page ng-controller="PedidoController" class="red">
 
@@ -266,22 +261,19 @@
                 <div class="left"><ons-back-button>Voltar</ons-back-button></div>
                 <div class="center">Fazer Pedido</div>
             </ons-toolbar>
-			
-			
 		<ul class="list">
 		  <li class="list__header">
-	
 		  </li>
 		  <li class="list__item">
 			<div ng-controller="MyCtrl" >
-			  <autocomplete ng-model="itemcardapio" data="movies" xon-type="updateMovies"></autocomplete>
+			  <autocomplete ng-model="itemcardapio" data="cardapio"></autocomplete>
 			  <ons-row>
 					  <ons-col width="60px"  class="plan-right">
 					 
 					  </ons-col>
 					 <ons-col  class="plan-left">
 					 <input type="tel" name="tel" style="width:70px; height:30px" value="1"/>
-					 <button class="button" ng-click="enviarpedido(itemcardapio);">Enviar Pedido</button><br><br>
+					 <button class="button" ng-click="enviarpedido(itemcardapio, token);">Enviar Pedido</button><br><br>
 					  </ons-col>	
 				<ons-row>	  
 			 
@@ -314,15 +306,26 @@
 					</ons-row>
 				  </ons-list-item>
 				</ons-list>
-			
-					
-
-
-		
-		
-
-
         </ons-page>
     </ons-template>	
+	
+	<!-- FECHAR A CONTA -->
+    <ons-template id="fecharconta.html">
+        <ons-page ng-controller="PedidoController" class="red">
+		<ons-toolbar>
+			<div class="left"><ons-back-button>Voltar</ons-back-button></div>
+			<div class="center">Fechar a Conta</div>
+		</ons-toolbar>
+		<ul class="list">
+			  <li class="list__header">
+			  </li>
+			  <li class="list__item">
+			  Clique abaixo para pedir a conta<br><br>
+			  <button class="button" ng-click="enviarpedido('FECHAR A CONTA', token);">Fechar a conta</button><br><br>
+				</div>
+			  </li>
+		 </ul>
+        </ons-page>
+    </ons-template>		
 </body>
 </html>
