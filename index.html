@@ -222,7 +222,7 @@
     </ons-navigator>
 	
 <!-- CHAMAR GARÇOM -->
-    <ons-template id="detail.html">
+    <ons-template id="chamaGarcom.html">
         <ons-page ng-controller="DetailController">
             <ons-toolbar>
                 <div class="left"><ons-back-button>Voltar</ons-back-button></div>
@@ -265,7 +265,7 @@
 		  <li class="list__header">
 		  </li>
 		  <li class="list__item">
-			<div ng-controller="MyCtrl" >
+			<div ng-controller="CardapioController" >
 			  <autocomplete ng-model="itemcardapio" data="cardapio"></autocomplete>
 			  <ons-row>
 					  <ons-col width="60px"  class="plan-right">
@@ -320,7 +320,7 @@
 			  <li class="list__header">
 			  </li>
 			  <li class="list__item">
-			  Clique abaixo para pedir a conta<br><br>
+			  Confirme clicando no botão abaixo<br><br>
 			  <button class="button" ng-click="enviarpedido('FECHAR A CONTA', token);">Fechar a conta</button><br><br>
 				</div>
 			  </li>

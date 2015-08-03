@@ -4,7 +4,7 @@
 var module = angular.module('app', ['onsen','autocomplete']);
  
 	
-module.controller('MyCtrl', function($scope, $http){
+module.controller('CardapioController', function($scope, $http){
 	$http.get("http://chamagar.com/mx/cardapiojson.asp?acao=cancelar&hora=" + Date.now())
 .success(function(response) {
 	$scope.cardapio = response;
@@ -222,10 +222,10 @@ module.controller('MyCtrl', function($scope, $http){
 	$scope.numeromesa = page.options.numeromesa;
 	$scope.nomerestaurante = page.options.nomerestaurante;
 
-    $scope.showDetail = function(index) {
+    $scope.showChamaGarcom = function(index) {
       var selectedItem = $data.items[index];
       $data.selectedItem = selectedItem;
-      $scope.navi.pushPage('detail.html', {title : selectedItem.title, token: $scope.token});
+      $scope.navi.pushPage('chamaGarcom.html', {title : selectedItem.title, token: $scope.token});
     };
 
     $scope.showPedido = function(index) {
