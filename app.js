@@ -23,8 +23,15 @@ module.controller('CardapioController', function($scope, $http){
 	  
     };
 	
-	$scope.enviarpedido = function(itemcardapio, token) {
-	$http.get("http://chamagar.com/mx/cgjson.asp?codigomesa="+token+"&acao=enviarpedido&hora=" + Date.now() + "&itemcardapio=" + itemcardapio)
+	$scope.enviarpedido = function(itemcardapio, qtd_cardapio, token) {
+		
+	if (itemcardapio == undefined) {  
+		ons.notification.alert({ message: 'escolha um item do cardapio, basta começar a digitar e depois escolher...' });
+		return false;
+	}
+
+	
+	$http.get("http://chamagar.com/mx/cgjson.asp?codigomesa="+token+"&acao=enviarpedido&hora=" + Date.now() + "&itemcardapio=" + itemcardapio + "&quantidade=" + qtd_cardapio)
 	.success(function(response) {
 		ons.notification.alert({ message: 'pedido enviado' });
 
@@ -37,7 +44,10 @@ module.controller('CardapioController', function($scope, $http){
 	   setTimeout(function() {
         ons.notification.alert({ message: data });
       }, 100);
-     });    
+     }); 
+	 if (itemcardapio == 'FECHAR A CONTA') {
+		 $scope.navi.popPage();
+	 }
 	};	
 		
 	$scope.cancelarChamado = function(token) {
@@ -72,7 +82,7 @@ module.controller('CardapioController', function($scope, $http){
 	};
 });
 
-  module.controller('DetailController', function($scope, $data, $http, $timeout) {
+  module.controller('ChamaGarcomController', function($scope, $data, $http, $timeout) {
     $scope.item = $data.selectedItem;
     var timer;
 	var page = navi.getCurrentPage();
@@ -240,6 +250,11 @@ module.controller('CardapioController', function($scope, $http){
       $scope.navi.pushPage('fecharconta.html', {title : selectedItem.title, token: $scope.token});
     };
 
+    $scope.showDeUmaNota = function(index) {
+      var selectedItem = $data.items[index];
+      $data.selectedItem = selectedItem;
+      $scope.navi.pushPage('deumanota.html', {title : selectedItem.title, token: $scope.token});
+    };
 	
 	$scope.counter = 0;
     var timer;
@@ -256,6 +271,8 @@ module.controller('CardapioController', function($scope, $http){
 		$scope.chamando =  true; 
 		$scope.txtchamando = "Chamando..."
 	}
+	$scope.pedidos_ativos = response[0].pedidos_ativos;
+	$scope.pedidos_fechar_conta_ativos = response[0].pedidos_fechar_conta_ativos;
 	});
 	$scope.counter++;
 	timer = $timeout(
@@ -279,10 +296,6 @@ module.controller('CardapioController', function($scope, $http){
 
 	myLoop();
 
-	// When the DOM element is removed from the page,
-	// AngularJS will trigger the $destroy event on
-	// the scope. 
-	// Cancel timeout
 	$scope.$on(
 		"$destroy",
 		function( event ) { 
@@ -293,8 +306,37 @@ module.controller('CardapioController', function($scope, $http){
 	
   });
 
-  
-module.$inject = ['$scope','$timeout'];
+  module.controller('DeUmaNotaController', function($scope, $data, $http, $timeout) {
+    $scope.item = $data.selectedItem;
+    var timer;
+	var page = navi.getCurrentPage();
+	$scope.token = page.options.token;
+
+	$scope.rating = 2;
+    $scope.rateFunction = function(rating) {
+      alert('Rating selecionado - ' + rating);
+    };
+
+	// function enviarpedido que estava no appController
+	$scope.darnota = function(nota, comentario, token) {
+		
+		if (nota == undefined) {  
+			ons.notification.alert({ message: 'escolha uma nota...' });
+			return false;
+		}
+
+		$http.get("http://chamagar.com/mx/cgjson.asp?codigomesa="+token+"&acao=darnota&hora=" + Date.now() + "&nota=" + nota + "&comentario=" + comentario)
+		.success(function(response) {
+			ons.notification.alert({ message: 'nota registrada, obrigado' });
+			})
+		.error(function(response) {
+			ons.notification.alert({ message: 'erro r: ' + response });
+			});
+			
+		$scope.navi.popPage();
+	};	
+
+});  
 
 
   module.factory('$data', function() {
@@ -303,16 +345,57 @@ module.$inject = ['$scope','$timeout'];
       data.items = [
           {
               title: 'Chamar Garçom',
-              label: '0:22s',
-              desc: 'Damiano Macedo',
-			  txtchamando: '0:22s'
+              label: '0:01s',
+              desc: 'NOME Garçom',
+			  txtchamando: '0:00s'
           }
       ];
 
       return data;
   });
   
- 
+  module.directive('starRating',
+	function() {
+		return {
+			restrict : 'A',
+			template : '<ul class="rating">'
+					 + '	<li ng-repeat="star in stars" ng-class="star" ng-click="toggle($index)">'
+					 + '\u2605'
+					 + '</li>'
+					 + '</ul>',
+			scope : {
+				ratingValue : '=',
+				max : '=',
+				onRatingSelected : '&'
+			},
+			link : function(scope, elem, attrs) {
+				var updateStars = function() {
+					scope.stars = [];
+					for ( var i = 0; i < scope.max; i++) {
+						scope.stars.push({
+							filled : i < scope.ratingValue
+						});
+					}
+				};
+				
+				scope.toggle = function(index) {
+					scope.ratingValue = index + 1;
+					scope.onRatingSelected({
+						rating : index + 1
+					});
+				};
+				
+				scope.$watch('ratingValue',
+					function(oldVal, newVal) {
+						if (newVal) {
+							updateStars();
+						}
+					}
+				);
+			}
+		};
+	}
+);
 
   
   

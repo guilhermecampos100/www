@@ -183,6 +183,84 @@
     background-color: red;
 	height: 100%; 
  }
+ .notification {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-decoration: none;
+  padding: 0 4px;
+  width: auto;
+  height: 19px;
+  -webkit-border-radius: 19px;
+  border-radius: 19px;
+  background-color: #dc5236;
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  min-width: 19px;
+  line-height: 19px;
+  font-weight: 400;
+}
+.dropdown {
+  font-weight: 400;
+  font-size: 17px;
+  min-width: 29px;
+  min-height: 29px;
+  line-height: 19px;
+}
+</style>
+
+<!-- Estilo para rating com estrelas -->
+<style>
+
+.rating{
+  color: #a9a9a9;
+  margin: 0;
+  padding: 0;
+}
+
+ul.rating {
+  display: inline-block;
+}
+
+.rating li {
+  list-style-type: none;
+  display: inline-block;
+  padding: 1px;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.rating .filled {
+  color: #21568b;
+}
+
 </style>
 
 <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
@@ -204,7 +282,7 @@
 		<br><br><br>
 		<font color="white">
 		<center><ons-icon icon="fa-beer" size="50px" ></ons-icon><br>
-		<font style="font-size:200%; font-family: 'Lobster';">ChamaGar.com</font>
+		<font style="font-size:200%; font-family: 'Lobster';">ChamaGarçom</font>
 		
 		<br><br><br>
 		Digite o token de 4 letras<br><br>
@@ -223,7 +301,7 @@
 	
 <!-- CHAMAR GARÇOM -->
     <ons-template id="chamaGarcom.html">
-        <ons-page ng-controller="DetailController">
+        <ons-page ng-controller="ChamaGarcomController">
             <ons-toolbar>
                 <div class="left"><ons-back-button>Voltar</ons-back-button></div>
                 <div class="center">Chama Garçom</div>
@@ -272,11 +350,23 @@
 					 
 					  </ons-col>
 					 <ons-col  class="plan-left">
-					 <input type="tel" name="tel" style="width:70px; height:30px" value="1"/>
-					 <button class="button" ng-click="enviarpedido(itemcardapio, token);">Enviar Pedido</button><br><br>
-					  </ons-col>	
+					 Qtd:
+					 
+					 <select name="qtd_cardapio" ng-model="qtd_cardapio" class="dropdown">
+						<option class="opcao" value="1" selected="selected">1</option>
+						<option class="opcao" value="2">2</option>
+						<option class="opcao" value="3">3</option>	
+						<option class="opcao" value="4">4</option>
+						<option class="opcao" value="5">5</option>
+						<option class="opcao" value="6">6</option>
+						<option class="opcao" value="7">7</option>	
+						<option class="opcao" value="8">8</option>
+						<option class="opcao" value="9">9</option>
+						<option class="opcao" value="10">10</option>
+						</select>
+					 <button  ng-disabled="itemcardapio.length < 3 || itemcardapio.length == 'undefined' " class="button" ng-click="enviarpedido(itemcardapio, qtd_cardapio, token);">Enviar Pedido</button><br><br>
+					</ons-col>	
 				<ons-row>	  
-			 
 			 
 			</div>
 		  </li>
@@ -321,11 +411,43 @@
 			  </li>
 			  <li class="list__item">
 			  Confirme clicando no botão abaixo<br><br>
-			  <button class="button" ng-click="enviarpedido('FECHAR A CONTA', token);">Fechar a conta</button><br><br>
+			  <button class="button" ng-click="enviarpedido('FECHAR A CONTA', '1', token);">Fechar a conta</button><br><br>
+				</div>
+			  </li>
+		 </ul>
+        </ons-page>
+    </ons-template>	
+
+	<!-- DAR NOTA -->
+    <ons-template id="deumanota.html">
+        <ons-page ng-controller="DeUmaNotaController" class="red">
+		<ons-toolbar>
+			<div class="left"><ons-back-button>Voltar</ons-back-button></div>
+			<div class="center">De uma nota</div>
+		</ons-toolbar>
+		<ul class="list">
+			  <li class="list__header">
+			  </li>
+			  <li class="list__item">
+				<br>
+				<div ng-init="rating = star.rating + 1"></div>
+				<center>
+				<font style="font-size:35px">
+				<div class="star-rating" star-rating rating-value="rating" data-max="5" ></div>
+				</font>
+	
+				<font style="12px">Comentário opcional</font><br>
+				<font style="20px">
+				<textarea ng-model="comentario" name="comentario" cols=30 rows=3></textarea><br></font>
+
+				<button class="button" ng-click="darnota(rating, comentario, token);">Enviar nota</button><br><br>
+			  	</center>	
 				</div>
 			  </li>
 		 </ul>
         </ons-page>
     </ons-template>		
+	
+	
 </body>
 </html>

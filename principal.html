@@ -1,8 +1,9 @@
         <ons-page ng-controller="MasterController">
 
-			<div class="navigation-bar">
-				<div class="navigation-bar__center">{{nomerestaurante}} | Mesa {{numeromesa}}</div>
-			</div>
+			 <ons-toolbar>
+				<div class="left"><ons-back-button>Voltar</ons-back-button></div>
+				<div class="center">{{nomerestaurante}} | Mesa {{numeromesa}}</div>
+			</ons-toolbar>
 
             <ons-list >
                 <ons-list-item modifier="chevron" class="item" ng-repeat="item in items" ng-click="showChamaGarcom($index)">
@@ -28,7 +29,7 @@
                         </ons-col>
                         <ons-col>
                             <header>
-                                <span class="item-title">Pedir Item do Cardápio</span>
+                                <span class="item-title">Pedir Item do Cardápio &nbsp; <span class="notification"  ng-show="pedidos_ativos > 0" >   {{ pedidos_ativos }}  </span></span> 
                              </header>
                             <p class="item-desc">Peça diretamente ao balcão</p>
                         </ons-col>
@@ -44,14 +45,13 @@
                         </ons-col>
                         <ons-col>
                             <header>
-                                <span class="item-title">Fechar a Conta</span>
-                             </header>
-                            <p class="item-desc"></p>
+                                <span class="item-title">Fechar a Conta  &nbsp; <span class="notification" ng-show="pedidos_fechar_conta_ativos > 0" >  {{ pedidos_fechar_conta_ativos }}</span></span>
+                            </header>
                         </ons-col>
                     </ons-row>
                 </ons-list-item>
 
-				<ons-list-item modifier="chevron" class="item" ng-repeat="item in items" ng-click="showPedido($index)">
+				<ons-list-item modifier="chevron" class="item" ng-repeat="item in items" ng-click="showDeUmaNota($index)">
                     <ons-row>
                         <ons-col width="80px"><center>
 							<ons-icon icon="fa-star" size="30px" class="item-thum"></ons-icon></center>
@@ -60,7 +60,7 @@
                             <header>
                                 <span class="item-title">De uma nota</span>
                              </header>
-                            <p class="item-desc">Obrigado por contribuir</p>
+						    <p class="item-desc">Obrigado por contribuir</p>
                         </ons-col>
                     </ons-row>
                 </ons-list-item>
