@@ -291,13 +291,13 @@ ul.rating {
 			<ons-button style="background-color:#333333" ng-click="loginMesa(token)">Entrar</ons-button>	 
 			
 			</font>
-		<div class="bottom-bar">
-			<div class="bottom-bar__line-height" style="text-align:center">ChamaGar.com</div>
-		</div>
+
 		</center>
 		</div>	
         </ons-page>
     </ons-navigator>
+	
+	
 	
 <!-- CHAMAR GARÇOM -->
     <ons-template id="chamaGarcom.html">
@@ -406,15 +406,13 @@ ul.rating {
 			<div class="left"><ons-back-button>Voltar</ons-back-button></div>
 			<div class="center">Fechar a Conta</div>
 		</ons-toolbar>
-		<ul class="list">
-			  <li class="list__header">
-			  </li>
-			  <li class="list__item">
-			  Confirme clicando no botão abaixo<br><br>
-			  <button class="button" ng-click="enviarpedido('FECHAR A CONTA', '1', token);">Fechar a conta</button><br><br>
-				</div>
-			  </li>
-		 </ul>
+		
+		<div class="main-image-wrapper">
+		<i class="fa fa-money main-image"></i>
+		</div>
+		<center>
+			<button class="button fecharconta-button" ng-click="enviarpedido('FECHAR A CONTA', '1', token);">Fechar a conta</button>
+		</center>
         </ons-page>
     </ons-template>	
 

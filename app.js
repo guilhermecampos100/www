@@ -271,8 +271,10 @@ module.controller('CardapioController', function($scope, $http){
 		$scope.chamando =  true; 
 		$scope.txtchamando = "Chamando..."
 	}
-	$scope.pedidos_ativos = response[0].pedidos_ativos;
-	$scope.pedidos_fechar_conta_ativos = response[0].pedidos_fechar_conta_ativos;
+	$scope.pedidos_enviados = response[0].pedidos_enviados;
+	$scope.pedidos_emandamento = response[0].pedidos_emandamento;
+	$scope.pedidos_fechar_conta_enviados = response[0].pedidos_fechar_conta_enviados;
+	$scope.pedidos_fechar_conta_emandamento = response[0].pedidos_fechar_conta_emandamento;
 	});
 	$scope.counter++;
 	timer = $timeout(
