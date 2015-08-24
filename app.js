@@ -15,80 +15,32 @@ module.controller('CardapioController', function($scope, $http){
 	})
 });
 
-  module.controller('AppController', function($scope, $data, $http) {
+module.controller('AppController', function($scope, $data, $http) {
     $scope.doSomething = function() {
       setTimeout(function() {
         ons.notification.alert({ message: 'tapped' });
       }, 100);
 	  
-    };
-	
-	$scope.enviarpedido = function(itemcardapio, qtd_cardapio, token) {
-		
-	if (itemcardapio == undefined) {  
-		ons.notification.alert({ message: 'escolha um item do cardapio, basta começar a digitar e depois escolher...' });
-		return false;
-	}
 
-	
-	$http.get("http://chamagar.com/mx/cgjson.asp?codigomesa="+token+"&acao=enviarpedido&hora=" + Date.now() + "&itemcardapio=" + itemcardapio + "&quantidade=" + qtd_cardapio)
-	.success(function(response) {
-		ons.notification.alert({ message: 'pedido enviado' });
-
-		var scope = angular.element(document.getElementById("IDPedidoController")).scope();
-		scope.loopgui();
-		})
-	.error(function(data, status) {
-           $scope.messages = data || "Request failed";
-           $scope.status = status;
-	   setTimeout(function() {
-        ons.notification.alert({ message: data });
-      }, 100);
-     }); 
-	 if (itemcardapio == 'FECHAR A CONTA') {
-		 $scope.navi.popPage();
-	 }
-	};	
-		
-	$scope.cancelarChamado = function(token) {
-	$http.get("http://chamagar.com/mx/cgjson.asp?codigomesa="+token+"&acao=cancelar&hora=" + Date.now())
-	.success(function(response) {
-		$scope.mesa = response;
-		$scope.navi.popPage();
-		})
-	.error(function(data, status) {
-           $scope.messages = data || "Request failed";
-           $scope.status = status;
-	   setTimeout(function() {
-        ons.notification.alert({ message: data });
-      }, 100);
-     });    
-	};
-
-	$scope.ativarChamado = function(token) {
-		$http.get("http://chamagar.com/mx/cgjson.asp?codigomesa="+token+"&acao=ativar&hora=" + Date.now())
-		.success(function(response) {$scope.mesa = response;
-		
-		$scope.navi.popPage();
-		})
-		.error(function(data, status) {
-           $scope.messages = data || "Request failed";
-           $scope.status = status;
-		   
-	   setTimeout(function() {
-        ons.notification.alert({ message: data });
-      }, 100);
-     });    
 	};
 });
-
+	
   module.controller('ChamaGarcomController', function($scope, $data, $http, $timeout) {
     $scope.item = $data.selectedItem;
     var timer;
 	var page = navi.getCurrentPage();
 	$scope.token = page.options.token;
+	$scope.numeromesa = page.options.numeromesa;
+	$scope.nomerestaurante = page.options.nomerestaurante;
 	
-    function myLoop() {
+	$scope.voltaprincipal = function() {
+      $scope.navi.pushPage('principal.html', {title : 'testegui', token: $scope.token, numeromesa: $scope.numeromesa, nomerestaurante: $scope.nomerestaurante});
+    };
+	
+//	navi.pushPage('principal.html')
+	
+	
+    function atualiza() {
 	 $http.get("http://chamagar.com/mx/cgjson.asp?codigomesa="+ $scope.token +"&hora=" + Date.now())
 	.success(function(response) {
 	$scope.mesa = response;
@@ -96,31 +48,19 @@ module.controller('CardapioController', function($scope, $http){
 	if (response[0].status == 0) {
 		$scope.chamando =  false; 
 		$scope.txtchamando = "Chamar Garçom"
+		$scope.corcaixaborda = "background-color: #52dc3;";
 	}
 	else
 	{
 		$scope.chamando =  true; 
 		$scope.txtchamando = "Chamando..."
+		$scope.corcaixaborda = "background-color: red;";
 	}
 	});
-	timer = $timeout(
-		function() { 
-			console.log( "Timeout executed", Date.now() ); 
-		},
-		10000
-	);
-	timer.then(
-		function() { 
-			console.log( "Timer resolved!");
-			myLoop();
-		},
-		function() { 
-			console.log( "Timer rejected!" ); 
-		}
-	);
+
 	}
 
-	myLoop();
+	atualiza();
 
 	// When the DOM element is removed from the page,
 	// AngularJS will trigger the $destroy event on
@@ -132,6 +72,37 @@ module.controller('CardapioController', function($scope, $http){
 			$timeout.cancel( timer ); 
 		}
 	);
+	
+	$scope.ativarChamado = function(token) {
+		$http.get("http://chamagar.com/mx/cgjson.asp?codigomesa="+token+"&acao=ativar&hora=" + Date.now())
+		.success(function(response) {$scope.mesa = response;
+			 $scope.voltaprincipal();
+		})
+		.error(function(data, status) {
+           $scope.messages = data || "Request failed";
+           $scope.status = status;
+		   
+	   setTimeout(function() {
+        ons.notification.alert({ message: data });
+      }, 100);
+     });    
+	};
+
+	$scope.cancelarChamado = function(token) {
+		$http.get("http://chamagar.com/mx/cgjson.asp?codigomesa="+token+"&acao=cancelar&hora=" + Date.now())
+		.success(function(response) {
+			$scope.mesa = response;
+			 $scope.voltaprincipal();
+			})
+		.error(function(data, status) {
+			   $scope.messages = data || "Request failed";
+			   $scope.status = status;
+		   setTimeout(function() {
+			ons.notification.alert({ message: data });
+		  }, 100);
+		 });    
+	};
+	
 	
 });
 
@@ -164,13 +135,16 @@ module.controller('CardapioController', function($scope, $http){
 	.success(function(response) {
 		$scope.mesa = response;
 		if (response[0].mesa == 'nao encontrada') {
-			$scope.mensagem =  "mesa não encontrada"; 
+			alert(token + " token não encontrado. Favor perguntar ao garçom o token desta mesa");
 		}
 		else
 		{
 			$scope.numeromesa = response[0].mesa;
 			entrar(token, response[0].mesa, response[0].restaurante );
 		}
+	})
+	.error(function(response) {
+		alert(response);
 	});
   };
   
@@ -185,14 +159,22 @@ module.controller('CardapioController', function($scope, $http){
     $scope.item = $data.selectedItem;
     var timer;
 	var page = navi.getCurrentPage();
+	
 	$scope.token = page.options.token;
-		
+	$scope.numeromesa = page.options.numeromesa;
+	$scope.nomerestaurante = page.options.nomerestaurante;
+	
+	$scope.voltaprincipal = function() {
+      $scope.navi.pushPage('principal.html', {title : 'testegui', token: $scope.token, numeromesa: $scope.numeromesa, nomerestaurante: $scope.nomerestaurante});
+    };
+	
+	
     var loopgui = function myLoop() {
 		 $http.get("http://chamagar.com/mx/pedidosjson.asp?codigomesa="+ $scope.token + "&hora=" + Date.now())
 		.success(function(response) {
 			$scope.pedidos = response;
 		});
-		timer = $timeout(
+	/* 	timer = $timeout(
 			function() { 
 				console.log( "Timeout executed", Date.now() ); 
 			},
@@ -206,7 +188,7 @@ module.controller('CardapioController', function($scope, $http){
 			function() { 
 				console.log( "Timer rejected!" ); 
 			}
-		);
+		); */
 	}
 
 	loopgui();
@@ -222,6 +204,31 @@ module.controller('CardapioController', function($scope, $http){
 		}
 	);
 	
+	$scope.enviarpedido = function(itemcardapio, qtd_cardapio, token) {
+	
+	if (itemcardapio == undefined) {  
+		ons.notification.alert({ message: 'escolha um item do cardapio, basta começar a digitar e depois escolher...' });
+		return false;
+	}
+
+	$http.get("http://chamagar.com/mx/cgjson.asp?codigomesa="+token+"&acao=enviarpedido&hora=" + Date.now() + "&itemcardapio=" + itemcardapio + "&quantidade=" + qtd_cardapio)
+	.success(function(response) {
+		ons.notification.alert({ message: 'pedido enviado' });
+	//	var scope = angular.element(document.getElementById("IDPedidoController")).scope();
+	//	scope.loopgui();
+		})
+	.error(function(data, status) {
+		   $scope.messages = data || "Request failed";
+		   $scope.status = status;
+	   setTimeout(function() {
+		ons.notification.alert({ message: data });
+	  }, 100);
+	 }); 
+	 $scope.voltaprincipal();
+
+	};	
+	
+	
 });
 
   module.controller('MasterController', function($scope, $data, $http, $timeout) {
@@ -235,75 +242,102 @@ module.controller('CardapioController', function($scope, $http){
     $scope.showChamaGarcom = function(index) {
       var selectedItem = $data.items[index];
       $data.selectedItem = selectedItem;
-      $scope.navi.pushPage('chamaGarcom.html', {title : selectedItem.title, token: $scope.token});
+	  clearInterval(loop);
+      $scope.navi.pushPage('chamaGarcom.html', {title : selectedItem.title, token: $scope.token, numeromesa: $scope.numeromesa, nomerestaurante:  $scope.nomerestaurante});
     };
 
     $scope.showPedido = function(index) {
       var selectedItem = $data.items[index];
       $data.selectedItem = selectedItem;
-      $scope.navi.pushPage('pedido.html', {title : selectedItem.title, token: $scope.token});
+	  // cancelando a atualizacao automatica via json
+	  clearInterval(loop);
+      $scope.navi.pushPage('pedido.html', {title : selectedItem.title, token: $scope.token, numeromesa: $scope.numeromesa, nomerestaurante: $scope.nomerestaurante});
     };
 
     $scope.showFecharConta = function(index) {
+	
       var selectedItem = $data.items[index];
       $data.selectedItem = selectedItem;
-      $scope.navi.pushPage('fecharconta.html', {title : selectedItem.title, token: $scope.token});
+	  if ($scope.pedidos_fechar_conta_enviados == "0" && $scope.pedidos_fechar_conta_emandamento == "0") {
+		clearInterval(loop);
+		$scope.navi.pushPage('fecharconta.html', {title : selectedItem.title, token: $scope.token, numeromesa: $scope.numeromesa, nomerestaurante:  $scope.nomerestaurante});
+	  }
     };
 
     $scope.showDeUmaNota = function(index) {
       var selectedItem = $data.items[index];
       $data.selectedItem = selectedItem;
-      $scope.navi.pushPage('deumanota.html', {title : selectedItem.title, token: $scope.token});
+	  clearInterval(loop);
+      $scope.navi.pushPage('deumanota.html', {title : selectedItem.title, token: $scope.token, numeromesa: $scope.numeromesa, nomerestaurante:  $scope.nomerestaurante});
     };
 	
 	$scope.counter = 0;
     var timer;
 
-    function myLoop() {
+    function atualiza() {
 	 $http.get("http://chamagar.com/mx/cgjson.asp?codigomesa="+$scope.token+"&hora=" + Date.now())
 	.success(function(response) {$scope.mesa = response;
 	if (response[0].status == 0) {
 		$scope.chamando =  false; 
 		$scope.txtchamando = "Chamar Garçom"
+			$scope.corcaixaborda = "background-color: #52dc36;";
 	}
 	else
 	{
 		$scope.chamando =  true; 
 		$scope.txtchamando = "Chamando..."
+			$scope.corcaixaborda = "background-color: red;";
 	}
 	$scope.pedidos_enviados = response[0].pedidos_enviados;
 	$scope.pedidos_emandamento = response[0].pedidos_emandamento;
+
 	$scope.pedidos_fechar_conta_enviados = response[0].pedidos_fechar_conta_enviados;
 	$scope.pedidos_fechar_conta_emandamento = response[0].pedidos_fechar_conta_emandamento;
+	
+	$scope.corCaixaBordaPedidos = "background-color: white;";
+	$scope.corCaixaBordaFecharConta = "background-color: white;";
+	
+	if ($scope.pedidos_emandamento != "0") {$scope.corCaixaBordaPedidos = "background-color: #52dc36;"}
+	if ($scope.pedidos_enviados != "0") {$scope.corCaixaBordaPedidos = "background-color: red;";}
+	if ($scope.pedidos_fechar_conta_emandamento != "0") {$scope.corCaixaBordaFecharConta = "background-color: #52dc36;"}
+	if ($scope.pedidos_fechar_conta_enviados != "0") {$scope.corCaixaBordaFecharConta = "background-color: red;";}
+
 	});
-	$scope.counter++;
+
+	}
+
+	atualiza();
+	var loop = setInterval(atualiza, 5000);
+	
+	
+/* 	$scope.counter++;
 	timer = $timeout(
 		function() { 
 			console.log( "Timeout executed", Date.now() ); 
 		},
-		10000
+		3000
 	);
 
 	timer.then(
 		function() { 
-			console.log( "Timer resolved!");
-			myLoop();
+			console.log( "Timer sucesso!");
+			atualiza();
 
 		},
 		function() { 
-			console.log( "Timer rejected!" ); 
+			console.log( "Timer erro!" ); 
 		}
-	);
-	}
+	); */
+	
+	
+	//atualiza();
 
-	myLoop();
-
-	$scope.$on(
+	/* $scope.$on(
 		"$destroy",
 		function( event ) { 
 			$timeout.cancel( timer ); 
-		}
-	);
+		} 
+	);*/
 
 	
   });
@@ -313,7 +347,13 @@ module.controller('CardapioController', function($scope, $http){
     var timer;
 	var page = navi.getCurrentPage();
 	$scope.token = page.options.token;
-
+	$scope.numeromesa = page.options.numeromesa;
+	$scope.nomerestaurante = page.options.nomerestaurante;
+	
+	$scope.voltaprincipal = function() {
+      $scope.navi.pushPage('principal.html', {title : 'testegui', token: $scope.token, numeromesa: $scope.numeromesa, nomerestaurante: $scope.nomerestaurante});
+    };
+	
 	$scope.rating = 2;
     $scope.rateFunction = function(rating) {
       alert('Rating selecionado - ' + rating);
@@ -335,7 +375,7 @@ module.controller('CardapioController', function($scope, $http){
 			ons.notification.alert({ message: 'erro r: ' + response });
 			});
 			
-		$scope.navi.popPage();
+		$scope.voltaprincipal();
 	};	
 
 });  
@@ -349,7 +389,9 @@ module.controller('CardapioController', function($scope, $http){
               title: 'Chamar Garçom',
               label: '0:01s',
               desc: 'NOME Garçom',
-			  txtchamando: '0:00s'
+			  txtchamando: '0:00s',
+			  corCaixaBordaFecharConta: 'grey',
+			  corCaixaBordaPedidos: 'grey'
           }
       ];
 

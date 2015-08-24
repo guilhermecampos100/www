@@ -3,7 +3,11 @@
 				<div class="left"><ons-back-button>Voltar</ons-back-button></div>
 				<div class="center">{{nomerestaurante}} | Mesa {{numeromesa}}</div>
 			</ons-toolbar>
-
+<style>
+.caixaborda {
+background-color: white; border: 1px solid #cccccc; border-radius: 8px; width:70px; height:70px; 
+}
+</style>
             <ons-list >
                 <ons-list-item modifier="chevron" class="item" ng-repeat="item in items" ng-click="showChamaGarcom($index)">
                     <ons-row>
@@ -24,17 +28,17 @@
 				<ons-list-item modifier="chevron" class="item" ng-repeat="item in items" ng-click="showPedido($index)">
                     <ons-row>
                         <ons-col width="80px">
-							<center><ons-icon icon="fa-beer" size="30px" class="item-thum"></ons-icon></center>
+							<div class="caixaborda" style="{{corCaixaBordaPedidos}}">
+							<center><ons-icon icon="fa-beer" size="30px" class="item-thum" style="margin-top: 20px;"></ons-icon></center>
+							</div>
                         </ons-col>
                         <ons-col>
                             <header>
                                 <span class="item-title">Pedir Item do Cardápio</span> 
                              </header>
-                            <p class="item-desc" ng-show="pedidos_enviados + pedidos_emandamento == 0">Peça diretamente ao balcão</p>
-							<p class="item-desc" ng-show="pedidos_enviados + pedidos_emandamento > 0">
-							<span class="item-desc" ng-show="pedidos_enviados > 0"> <span class="notification">{{ pedidos_enviados }}</span> enviado</span>
-							<br><span class="item-desc" ng-show="pedidos_emandamento > 0"> <span class="notification notificationverde" style="background-color: #52dc36; margin-top: 2px;">{{ pedidos_emandamento }}</span> em andamento</span>
-							</p>
+                            <p class="item-desc" ng-show="pedidos_enviados + pedidos_emandamento == 0">Peça sem chamar o garçom</p>
+							<div class="item-desc" ng-show="pedidos_enviados > 0"> <span class="notification">{{ pedidos_enviados }}</span> enviado</div>
+							<div class="item-desc" ng-show="pedidos_emandamento > 0"> <span class="notification notificationverde" style="background-color: #52dc36; margin-top: 2px;">{{ pedidos_emandamento }}</span> em andamento</div>
                         </ons-col>
                     </ons-row>
 					
@@ -43,16 +47,17 @@
 
 				<ons-list-item modifier="chevron" class="item" ng-repeat="item in items" ng-click="showFecharConta($index)">
                     <ons-row>
-                        <ons-col width="80px"><center>
-							<ons-icon icon="fa-money" size="30px" class="item-thum"></ons-icon></center>
+                        <ons-col width="80px">
+						<div class="caixaborda" style="{{corCaixaBordaFecharConta}}">
+							<center>
+							<ons-icon icon="fa-money" size="30px" class="item-thum" style="margin-top: 20px;"></ons-icon></center>
+						</div>	
                         </ons-col>
                         <ons-col>
                             <header>
                                 <span class="item-title">Fechar a Conta  </span>
-								<p class="item-desc" ng-show="pedidos_fechar_conta_enviados + pedidos_fechar_conta_emandamento > 0">
-								<span ng-show="pedidos_fechar_conta_enviados > 0"> <span class="notification">  {{ pedidos_fechar_conta_enviados }}</span> enviado</span>
-								<span ng-show="pedidos_fechar_conta_emandamento > 0"> <span class="notification notificationverde">  {{ pedidos_fechar_conta_emandamento}}</span> em andamento</span>
-								</p>
+								<div ng-show="pedidos_fechar_conta_enviados > 0"> <span class="notification">  {{ pedidos_fechar_conta_enviados }}</span> enviado</div>
+								<div ng-show="pedidos_fechar_conta_emandamento > 0"> <span class="notification notificationverde" style="background-color: #52dc36; margin-top: 2px;">  {{ pedidos_fechar_conta_emandamento}}</span> em andamento</div>
                             </header>
                         </ons-col>
                     </ons-row>
@@ -60,8 +65,11 @@
 
 				<ons-list-item modifier="chevron" class="item" ng-repeat="item in items" ng-click="showDeUmaNota($index)">
                     <ons-row>
-                        <ons-col width="80px"><center>
-							<ons-icon icon="fa-star" size="30px" class="item-thum"></ons-icon></center>
+                        <ons-col width="80px">
+						<div class="caixaborda">
+							<center>
+							<ons-icon icon="fa-star" size="30px" class="item-thum" style="margin-top: 20px;"></ons-icon></center>
+						</div>	
                         </ons-col>
                         <ons-col>
                             <header>
