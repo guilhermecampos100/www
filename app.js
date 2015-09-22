@@ -307,7 +307,7 @@ module.controller('AppController', function($scope, $data, $http) {
 	}
 
 	atualiza();
-	var loop = setInterval(atualiza, 5000);
+	var loop = setInterval(atualiza, 2000);
 	
 	
 /* 	$scope.counter++;

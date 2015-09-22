@@ -56,9 +56,10 @@ background-color: white; border: 1px solid #cccccc; border-radius: 8px; width:70
                         <ons-col>
                             <header>
                                 <span class="item-title">Fechar a Conta  </span>
-								<div ng-show="pedidos_fechar_conta_enviados > 0"> <span class="notification">  {{ pedidos_fechar_conta_enviados }}</span> enviado</div>
-								<div ng-show="pedidos_fechar_conta_emandamento > 0"> <span class="notification notificationverde" style="background-color: #52dc36; margin-top: 2px;">  {{ pedidos_fechar_conta_emandamento}}</span> em andamento</div>
-                            </header>
+							</header>
+							<div class="item-desc" ng-show="pedidos_fechar_conta_enviados > 0"> <span class="notification">  {{ pedidos_fechar_conta_enviados }}</span> enviado</div>
+							<div class="item-desc" ng-show="pedidos_fechar_conta_emandamento > 0"> <span class="notification notificationverde" style="background-color: #52dc36; margin-top: 2px;">  {{ pedidos_fechar_conta_emandamento}}</span> em andamento</div>
+
                         </ons-col>
                     </ons-row>
                 </ons-list-item>
